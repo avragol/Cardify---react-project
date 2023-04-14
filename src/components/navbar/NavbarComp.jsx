@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
+
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -19,11 +19,11 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 
 
 import SearchPartial from "./SearchPartial";
+import MobileMenuPartial from './MobileMenuPartial';
 import { darkModeActions } from "../../store/DarkMode";
 
 const NavbarComp = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
     const dispatch = useDispatch();
     const isDarkMode = useSelector(
         (bigPie) => bigPie.darkModeSlice.isDarkMode
@@ -34,15 +34,6 @@ const NavbarComp = () => {
     const handleModeTheme = () => {
         dispatch(darkModeActions.changeTheme())
     }
-
-    const handleOpenNavMobileMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
-    }
-
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    }
-
 
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -89,7 +80,7 @@ const NavbarComp = () => {
                     >
                         CARDIFY
                     </Typography>
-                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{ display: { xs: 'none', md: 'flex' }, marginLeft: { xs: '0', md: '0.5rem' } }}>
                         {/*  {pages.map((page) => (
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                                     <Typography textAlign="center">{page}</Typography>
@@ -99,45 +90,7 @@ const NavbarComp = () => {
                             <Typography textAlign="center">Test</Typography>
                         </MenuItem>
                     </Box>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleOpenNavMobileMenu}
-                            color="inherit"
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', md: 'none' },
-                            }}
-                        >
-                            <MenuItem onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">Test</Typography>
-                            </MenuItem>
-                            {/*  {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
-                                </MenuItem>
-                            ))} */}
-                        </Menu>
-                    </Box>
+                    <MobileMenuPartial /* {...pages} */ />
                     <Box sx={{ flexGrow: 1 }} />
                     <IconButton
                         size="large"

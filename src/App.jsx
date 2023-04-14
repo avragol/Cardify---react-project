@@ -13,7 +13,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "./App.css";
-import NavbarComp from "./components/navbar/NavbarComp"
+import NavbarComp from "./components/Navbar/NavbarComp"
+import Footer from "./components/Footer";
 
 const light = {
   palette: {
@@ -52,7 +53,7 @@ const App = () => {
       <Container>
         <header><NavbarComp /></header>
         <main><h1>Main</h1></main>
-        <footer><h1>Footer</h1></footer>
+        <footer><Footer /></footer>
       </Container>
     </ThemeProvider>
   );
