@@ -13,8 +13,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "./App.css";
-import NavbarComp from "./components/Navbar/NavbarComp"
-import Footer from "./components/Footer";
+import NavbarComp from "./components/Navbar/NavbarComp";
+import FooterComp from "./components/FooterComp";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
 
 const light = {
   palette: {
@@ -50,10 +51,14 @@ const App = () => {
         pauseOnHover
         theme="colored"
       />
-      <Container>
+      <Container sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+      }}>
         <header><NavbarComp /></header>
-        <main><h1>Main</h1></main>
-        <footer><Footer /></footer>
+        <main><RegisterPage /></main>
+        <FooterComp />
       </Container>
     </ThemeProvider>
   );

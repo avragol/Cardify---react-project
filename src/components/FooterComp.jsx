@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { Container, Typography, IconButton } from '@mui/material';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -9,8 +9,9 @@ const useStyles = makeStyles((theme) => ({
     footer: {
         backgroundColor: theme.palette.secondary.main,
         color: theme.palette.secondary.contrastText,
-        padding: theme.spacing(2),
+        padding: theme.spacing(1),
         marginTop: 'auto',
+
     },
     iconButton: {
         color: theme.palette.secondary.contrastText,
@@ -18,13 +19,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Footer = () => {
+const FooterComp = () => {
     const classes = useStyles();
 
     return (
         <footer className={classes.footer}>
             <Container maxWidth="md">
-                <Typography variant="body2" align="center">
+                <Typography variant="body2" align="center" fontWeight={600}>
                     © {new Date().getFullYear()} Avraham Gol
                 </Typography>
                 <Typography variant="body2" align="center">
@@ -43,4 +44,4 @@ const Footer = () => {
     );
 };
 
-export default Footer;
+export default FooterComp;
