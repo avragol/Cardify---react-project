@@ -17,6 +17,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import SearchPartial from "./SearchPartial";
 import MobileMenuPartial from './MobileMenuPartial';
 import NavLinkComponent from './NavLinkComponent';
+import MobileProfilePartial from './MobileProfilePartial';
 import ProfileMenuComp from './ProfileMenuComp';
 import { darkModeActions } from "../../store/DarkMode";
 import { authActions } from "../../store/auth";
@@ -135,11 +136,20 @@ const NavbarComp = () => {
 
                             }
                         </IconButton>
-                        : notAuthPages.map(page =>
-                            <MenuItem onClick={handleMenuClose} key={`notAuthPage-${page.url}`}>
-                                <NavLinkComponent url={page.url} label={page.label} />
-                            </MenuItem>
-                        )
+                        :
+                        <React.Fragment>
+                            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                                <MobileProfilePartial pages={notAuthPages} />
+                            </Box>
+                            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                                {notAuthPages.map(page =>
+                                    <MenuItem onClick={handleMenuClose} key={`notAuthPage-${page.url}`}>
+                                        <NavLinkComponent url={page.url} label={page.label} />
+                                    </MenuItem>
+                                )}
+                            </Box>
+                        </React.Fragment>
+
                     }
                 </Toolbar>
             </AppBar>

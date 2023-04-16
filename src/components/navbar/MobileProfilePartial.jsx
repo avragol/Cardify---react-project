@@ -4,10 +4,11 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import { NavLink } from 'react-router-dom';
 
 
-const MobileMenuPartial = (pages) => {
+const MobileProfilePartial = ({ pages }) => {
 
     const [anchorElNav, setAnchorElNav] = useState(null);
 
@@ -28,7 +29,7 @@ const MobileMenuPartial = (pages) => {
                 onClick={handleOpenNavMobileMenu}
                 color="inherit"
             >
-                <MenuIcon />
+                <AccountBoxIcon />
             </IconButton>
             <Menu
                 id="menu-appbar"
@@ -48,16 +49,17 @@ const MobileMenuPartial = (pages) => {
                     display: { xs: 'block', md: 'none' },
                 }}
             >
-                <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">Test</Typography>
-                </MenuItem>
-                {/* {pages.map((page) => (
+                {pages.map((page) => (
                     <MenuItem key={page.url} onClick={handleCloseNavMenu}>
-                        <Typography textAlign="center">{page.label}</Typography>
+                        <NavLink to={page.url}>
+                            <Typography textAlign="center" color={"#9C27B0"}>
+                                {page.label}
+                            </Typography>
+                        </NavLink>
                     </MenuItem>
-                ))} */}
+                ))}
             </Menu>
         </Box>
     )
 }
-export default MobileMenuPartial;
+export default MobileProfilePartial;
