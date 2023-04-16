@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -37,6 +37,7 @@ const NavbarComp = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [avatar, setAvatar] = React.useState(null);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const isDarkMode = useSelector(
         (bigPie) => bigPie.darkModeSlice.isDarkMode
     );
@@ -70,6 +71,7 @@ const NavbarComp = () => {
         dispatch(authActions.logOut())
         localStorage.removeItem("userToken")
         toast.success("Goodbye! see you leter")
+        navigate(ROUTES.HOME)
     }
 
 
@@ -100,6 +102,24 @@ const NavbarComp = () => {
                     onClick={handleLogOut}>
                     Sign Out
                 </Typography>
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+                <NavLink to={ROUTES.PROFILE}
+                >
+                    {() => (
+                        <Typography
+                            variant="button"
+                            sx={{
+                                display: "block",
+                                paddingX: "0.1rem",
+                            }}
+                            color="#9C27B0"
+                        >
+                            Profile
+                        </Typography>)
+                    }
+
+                </NavLink >
             </MenuItem>
         </Menu>
     );
