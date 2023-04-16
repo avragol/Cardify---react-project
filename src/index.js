@@ -21,9 +21,8 @@ import axios from "axios";
 
 /* axios */
 axios.defaults.baseURL = "/api";
-
 axios.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("userToken");
   if (token) {
     /*
       if the token exists in localStorage

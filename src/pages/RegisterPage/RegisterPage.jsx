@@ -6,7 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
@@ -17,6 +17,7 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import FieldComponent from '../../components/FieldComponent';
 import { registerFieldsArray } from './registerFieldsArray';
 import { feildValidation } from '../../validation/feildValidation';
+import ROUTES from '../../routes/ROUTES';
 
 
 const initialFormState = {
@@ -150,7 +151,7 @@ const RegisterPage = () => {
                     </Grid>
                     <Grid container justifyContent="flex-end">
                         <Grid item>
-                            <Link href="#" variant="body2">
+                            <Link to={ROUTES.LOGIN} variant="body2">
                                 Already have an account? Sign in
                             </Link>
                         </Grid>

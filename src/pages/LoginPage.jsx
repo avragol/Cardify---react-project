@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Joi from 'joi';
+import { toast } from 'react-toastify';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LoginIcon from '@mui/icons-material/Login';
@@ -13,6 +16,8 @@ import Container from '@mui/material/Container';
 
 import FieldComponent from '../components/FieldComponent';
 import { feildValidation } from '../validation/feildValidation';
+import ROUTES from '../routes/ROUTES';
+import useLoggedIn from '../hooks/useLoggedIn';
 
 const loginFieldsArray = [
     {
@@ -50,6 +55,8 @@ const LoginPage = () => {
     const [formError, setFormError] = useState({});
     const [fieldToFocus, setFieldToFocus] = useState(0);
     const [formValid, setFormValid] = useState(false);
+    const navigate = useNavigate();
+    const loggedIn = useLoggedIn();
 
     const handleFocus = (event) => {
         setFieldToFocus(loginFieldsArray.findIndex(field => field.name === event.target.name));
@@ -65,17 +72,15 @@ const LoginPage = () => {
     };
 
     const handleChange = (event) => {
-        const { name, value, type, checked, id } = event.target;
-        if (type !== 'checkbox') {
-            const { joi, label } = loginFieldsArray.find(field => field.id === id);
-            setFormError({
-                ...formError,
-                [name]: feildValidation(joi, value, label)
-            });
-        }
+        const { name, value, id } = event.target;
+        const { joi, label } = loginFieldsArray.find(field => field.id === id);
+        setFormError({
+            ...formError,
+            [name]: feildValidation(joi, value, label)
+        });
         setFormData({
             ...formData,
-            [name]: type === 'checkbox' ? checked : value
+            [name]: value
         });
     };
 
@@ -83,13 +88,20 @@ const LoginPage = () => {
         setFormValid(validateForm());
     }, [formData, formError]);
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        if (!formValid) {
+            toast.info("don't piss me off!")
+            return
+        }
+        try {
+            localStorage.setItem("userToken", (await axios.post("/users/login", formData)).data.token);
+            loggedIn();
+            toast.success(`Welcome ${(await axios.get("/users/userInfo")).data.firstName}! Good to see you again`);
+            navigate(ROUTES.HOME)
+        } catch (err) {
+            toast.error(err.response.data);
+        }
     };
 
     return (
@@ -134,7 +146,7 @@ const LoginPage = () => {
                     </Grid>
                     <Grid container justifyContent={"flex-end"}>
                         <Grid item>
-                            <Link href="#" variant="body2">
+                            <Link to={ROUTES.REGISTER} variant="body2">
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>

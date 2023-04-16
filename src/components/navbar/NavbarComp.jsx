@@ -16,6 +16,19 @@ import SearchPartial from "./SearchPartial";
 import MobileMenuPartial from './MobileMenuPartial';
 import NavLinkComponent from './NavLinkComponent';
 import { darkModeActions } from "../../store/DarkMode";
+import ROUTES from '../../routes/ROUTES';
+
+//pages for not logged in users
+const notAuthPages = [
+    {
+        label: "Sign Up",
+        url: ROUTES.REGISTER
+    }
+    , {
+        label: "Sign In",
+        url: ROUTES.LOGIN
+    },
+]
 
 const NavbarComp = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -55,12 +68,11 @@ const NavbarComp = () => {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>
-                <NavLinkComponent url={"/register"} label={"Sign Up"} />
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose}>
-                <NavLinkComponent url={"/login"} label={"Sign In"} />
-            </MenuItem>
+            {notAuthPages.map(page =>
+                <MenuItem onClick={handleMenuClose}>
+                    <NavLinkComponent url={page.url} label={page.label} />
+                </MenuItem>
+            )}
         </Menu>
     );
 
