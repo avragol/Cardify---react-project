@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Avatar from '@mui/material/Avatar';
@@ -56,8 +56,11 @@ const RegisterPage = () => {
             ...formData,
             [name]: type === 'checkbox' ? checked : value
         });
-        setFormValid(validateForm())
     };
+
+    useEffect(() => {
+        setFormValid(validateForm());
+    }, [formData, formError]);
 
     const restForm = () => {
         setFormData(initialFormState);

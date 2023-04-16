@@ -58,6 +58,9 @@ const NavbarComp = () => {
             <MenuItem onClick={handleMenuClose}>
                 <NavLinkComponent url={"/register"} label={"Sign Up"} />
             </MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+                <NavLinkComponent url={"/login"} label={"Sign In"} />
+            </MenuItem>
         </Menu>
     );
 
