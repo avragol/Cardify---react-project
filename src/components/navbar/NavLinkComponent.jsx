@@ -5,14 +5,13 @@ const NavLinkComponent = ({ url, label }) => {
     return (
         <NavLink key={url} to={url}
         >
-            {({ isActive }) => (
+            {() => (
                 <Typography
                     variant="button"
                     sx={{
                         display: "block",
-                        paddingX: "0.3rem",
+                        paddingX: "0.1rem",
                     }}
-                    color={isActive ? "lightgreen" : "#9C27B0"}
                 >
                     {label}
                 </Typography>)

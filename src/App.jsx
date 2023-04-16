@@ -16,6 +16,7 @@ import "./App.css";
 import NavbarComp from "./components/Navbar/NavbarComp";
 import FooterComp from "./components/FooterComp";
 import Router from "./routes/Router";
+import useLoggedIn from "./hooks/useLoggedIn";
 
 const light = {
   palette: {
@@ -32,6 +33,8 @@ const dark = {
 const App = () => {
 
   //toast.info("Welcome! (only test)", { autoClose: 2000 })
+
+  useLoggedIn()();
 
   const isDarkTheme = useSelector(
     (bigPie) => bigPie.darkModeSlice.isDarkMode
