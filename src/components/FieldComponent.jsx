@@ -1,9 +1,11 @@
 import TextField from '@mui/material/TextField';
 
-const FieldPartial = ({ state, setState, field }) => {
+const FieldComponent = ({ state, setState, field, onFocus, autoFocus }) => {
     const id = field.id;
     return (
         <TextField
+            onFocus={onFocus}
+            autoFocus={autoFocus}
             onChange={setState}
             value={state}
             name={field.name}
@@ -15,4 +17,4 @@ const FieldPartial = ({ state, setState, field }) => {
         />
     )
 }
-export default FieldPartial;
+export default FieldComponent;

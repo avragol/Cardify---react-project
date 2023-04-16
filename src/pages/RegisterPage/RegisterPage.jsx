@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -7,52 +9,75 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
-import FieldPartial from './FieldPartial';
-import { fieldsArray } from './fieldsArray';
+import FieldComponent from '../../components/FieldComponent';
+import { registerFieldsArray } from './registerFieldsArray';
 import { feildValidation } from '../../validation/feildValidation';
 
 
 const initialFormState = {
-    isBusinessUser: false
+    biz: false,
 };
 
 const RegisterPage = () => {
 
     const [formData, setFormData] = useState(initialFormState);
     const [formError, setFormError] = useState({});
+    const [fieldToFocus, setFieldToFocus] = useState(0);
+    const [formValid, setFormValid] = useState(false);
 
+    const handleFocus = (event) => {
+        setFieldToFocus(registerFieldsArray.findIndex(field => field.name === event.target.name));
+    }
+
+    const validateForm = () => {
+        for (const field of registerFieldsArray) {
+            if (field.required && (!formData[field.name] || formError[field.name])) {
+                return false;
+            }
+        }
+        return true;
+    };
 
     const handleChange = (event) => {
         const { name, value, type, checked, id } = event.target;
         if (type !== 'checkbox') {
-            const { joi, label } = fieldsArray.find(field => field.id === id);
+            const { joi, label } = registerFieldsArray.find(field => field.id === id);
             setFormError({
                 ...formError,
                 [name]: feildValidation(joi, value, label)
-            })
+            });
         }
         setFormData({
             ...formData,
             [name]: type === 'checkbox' ? checked : value
         });
+        setFormValid(validateForm())
     };
 
     const restForm = () => {
         setFormData(initialFormState);
+        setFieldToFocus(0);
+        setFormError({});
+        setFormValid(false)
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        if (!formValid) {
+            toast.info("don't piss me off!")
+            return
+        }
+        try {
+            await axios.post("/users/register", formData);
+            toast.success(`Welcome ${formData.firstName}! The registration was successful`);
+        } catch (err) {
+            toast.error(err.response.data);
+        }
     };
 
     return (
@@ -66,16 +91,18 @@ const RegisterPage = () => {
                 }}
             >
                 <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                    <LockOutlinedIcon />
+                    <HowToRegIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Sign up
                 </Typography>
                 <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
-                        {fieldsArray.map((field) =>
-                            <Grid item xs={12} sm={field.sm} key={`${new Date}-${field.id}`}>
-                                < FieldPartial
+                        {registerFieldsArray.map((field, index) =>
+                            <Grid item xs={12} sm={field.sm} key={`${new Date()}-${field.id}`}>
+                                < FieldComponent
+                                    onFocus={handleFocus}
+                                    autoFocus={index === fieldToFocus}
                                     state={formData[field.name] || ''}
                                     setState={handleChange}
                                     field={field} />
@@ -86,9 +113,10 @@ const RegisterPage = () => {
                                 control={<Checkbox
                                     checked={formData.isBusinessUser}
                                     color="secondary"
-                                    name="isBusinessUser"
-                                    id='isBusinessUser'
-                                    onChange={handleChange} />}
+                                    name="biz"
+                                    id='biz'
+                                    onChange={handleChange}
+                                    onFocus={handleFocus} />}
                                 label="Register as buissnes user"
                             />
                         </Grid>
@@ -98,6 +126,7 @@ const RegisterPage = () => {
                                 fullWidth
                                 variant="contained"
                                 color='secondary'
+                                disabled={!formValid}
                                 sx={{ mt: 1, mb: 2 }}
                             >
                                 Sign Up

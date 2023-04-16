@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-export const fieldsArray = [
+export const registerFieldsArray = [
     {
         label: "First Name",
         name: "firstName",
@@ -8,7 +8,6 @@ export const fieldsArray = [
         type: "text",
         sm: 4,
         required: true,
-        autoFocus: true,
         joi: Joi.string().min(2).max(15).required(),
     },
     {
@@ -18,7 +17,6 @@ export const fieldsArray = [
         type: "text",
         sm: 4,
         required: false,
-        autoFocus: false,
         joi: Joi.string().min(2).max(15).allow(''),
     },
     {
@@ -28,7 +26,7 @@ export const fieldsArray = [
         type: "text",
         sm: 4,
         required: true,
-        autoFocus: false,
+
         joi: Joi.string().min(2).max(15).required(),
     },
     {
@@ -38,7 +36,6 @@ export const fieldsArray = [
         type: "tel",
         sm: 6,
         required: true,
-        autoFocus: false,
         joi: Joi.string().regex(/^[0-9]{10}$/).messages({ 'string.pattern.base': `Phone number must have 10 digits.` }).required()
     },
     {
@@ -48,8 +45,7 @@ export const fieldsArray = [
         type: "email",
         sm: 6,
         required: true,
-        autoFocus: false,
-        joi: Joi.string().required(),
+        joi: Joi.string().email({ tlds: { allow: false } }).required(),
     },
     {
         label: "Password",
@@ -58,8 +54,10 @@ export const fieldsArray = [
         type: "password",
         sm: 6,
         required: true,
-        autoFocus: false,
-        joi: Joi.string().required(),
+        joi: Joi.string()
+            .pattern(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{0,}$")).min(8)
+            .messages({ 'string.pattern.base': `Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character from @$!%*?&.` })
+            .max(15).required(),
     },
     {
         label: "Image Alt",
@@ -68,7 +66,6 @@ export const fieldsArray = [
         type: "text",
         sm: 6,
         required: false,
-        autoFocus: false,
         joi: Joi.string().allow(''),
     },
     {
@@ -78,8 +75,7 @@ export const fieldsArray = [
         type: "url",
         sm: 12,
         required: false,
-        autoFocus: false,
-        joi: Joi.string().allow(''),
+        joi: Joi.string().pattern(new RegExp("^(https?://)?[^\\s/]+\\.[^\\s/]+/\\S+\\.(jpg|jpeg|png|gif)$")).messages({ 'string.pattern.base': `Image url is not vaild` }).allow(''),
     },
     {
         label: "State",
@@ -88,7 +84,6 @@ export const fieldsArray = [
         type: "text",
         sm: 4,
         required: false,
-        autoFocus: false,
         joi: Joi.string().allow(''),
     },
     {
@@ -98,7 +93,6 @@ export const fieldsArray = [
         type: "text",
         sm: 4,
         required: true,
-        autoFocus: false,
         joi: Joi.string().required(),
     },
     {
@@ -108,7 +102,6 @@ export const fieldsArray = [
         type: "text",
         sm: 4,
         required: true,
-        autoFocus: false,
         joi: Joi.string().required(),
     },
     {
@@ -118,7 +111,6 @@ export const fieldsArray = [
         type: "text",
         sm: 4,
         required: true,
-        autoFocus: false,
         joi: Joi.string().required(),
     },
     {
@@ -128,7 +120,6 @@ export const fieldsArray = [
         type: "number",
         sm: 4,
         required: true,
-        autoFocus: false,
         joi: Joi.number().required(),
     },
     {
@@ -138,7 +129,6 @@ export const fieldsArray = [
         type: "text",
         sm: 4,
         required: false,
-        autoFocus: false,
         joi: Joi.string().allow(''),
     },
 ];
