@@ -18,6 +18,7 @@ import FieldComponent from '../../components/FieldComponent';
 import { registerFieldsArray } from './registerFieldsArray';
 import { feildValidation } from '../../validation/feildValidation';
 import ROUTES from '../../routes/ROUTES';
+import CancelBtnComp from '../../components/CancelBtnComp';
 
 
 const initialFormState = {
@@ -131,7 +132,7 @@ const RegisterPage = () => {
                                 variant="contained"
                                 color='secondary'
                                 disabled={!formValid}
-                                sx={{ mt: 1, mb: 2 }}
+                                sx={{ mt: 1, mb: { xs: 0, md: 2 } }}
                             >
                                 Sign Up
                             </Button>
@@ -142,13 +143,14 @@ const RegisterPage = () => {
                                 fullWidth
                                 variant="contained"
                                 color='secondary'
-                                sx={{ mt: 1, mb: 2 }}
+                                sx={{ mb: 1, mt: { xs: 0, md: 2 } }}
                                 onClick={restForm}
                             >
                                 <RestartAltIcon /> Rest Form
                             </Button>
                         </Grid>
                     </Grid>
+                    <CancelBtnComp />
                     <Grid container justifyContent="flex-end">
                         <Grid item>
                             <Link to={ROUTES.LOGIN} variant="body2">
@@ -157,6 +159,7 @@ const RegisterPage = () => {
                         </Grid>
                     </Grid>
                 </Box>
+
             </Box>
         </Container>
 

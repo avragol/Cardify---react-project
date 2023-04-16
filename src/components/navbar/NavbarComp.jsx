@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import axios from 'axios';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
+
 import Avatar from '@mui/material/Avatar';
 import { useSelector, useDispatch } from 'react-redux';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
@@ -16,12 +17,11 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import SearchPartial from "./SearchPartial";
 import MobileMenuPartial from './MobileMenuPartial';
 import NavLinkComponent from './NavLinkComponent';
+import ProfileMenuComp from './ProfileMenuComp';
 import { darkModeActions } from "../../store/DarkMode";
 import { authActions } from "../../store/auth";
 import ROUTES from '../../routes/ROUTES';
-import { imgForAvatar } from '../../utils/imgForAvatar';
 
-//pages for not logged in users
 const notAuthPages = [
     {
         label: "Sign Up",
@@ -31,7 +31,7 @@ const notAuthPages = [
         label: "Sign In",
         url: ROUTES.LOGIN
     },
-]
+];
 
 const NavbarComp = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -45,13 +45,15 @@ const NavbarComp = () => {
         (bigPie) => bigPie.authSlice.isLoggedIn)
 
     React.useEffect(() => {
-        imgForAvatar()
-            .then((avatarFromPromise) => {
-                setAvatar(avatarFromPromise);
+        axios.get("/users/userInfo")
+            .then((userInfo) => {
+                setAvatar({
+                    url: userInfo.data.imageUrl,
+                    alt: userInfo.data.imageAlt
+                });
             })
             .catch((err) => console.log(err));
     }, [isLoggedIn]);
-
 
     const isMenuOpen = Boolean(anchorEl);
 
@@ -72,64 +74,20 @@ const NavbarComp = () => {
         localStorage.removeItem("userToken")
         toast.success("Goodbye! see you leter")
         navigate(ROUTES.HOME)
-    }
-
+    };
 
     const renderProfileMenu = (
-        <Menu
+        <ProfileMenuComp
             anchorEl={anchorEl}
-            anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            id='account-menu'
-            keepMounted
-            transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-        >
-            <MenuItem onClick={handleMenuClose}>
-                <Typography
-                    variant="button"
-                    sx={{
-                        display: "block",
-                        paddingX: "0.3rem",
-                    }}
-                    color="#9C27B0"
-                    onClick={handleLogOut}>
-                    Sign Out
-                </Typography>
-            </MenuItem>
-            <MenuItem onClick={handleMenuClose}>
-                <NavLink to={ROUTES.PROFILE}
-                >
-                    {() => (
-                        <Typography
-                            variant="button"
-                            sx={{
-                                display: "block",
-                                paddingX: "0.1rem",
-                            }}
-                            color="#9C27B0"
-                        >
-                            Profile
-                        </Typography>)
-                    }
-
-                </NavLink >
-            </MenuItem>
-        </Menu>
+            isMenuOpen={isMenuOpen}
+            handleLogOut={handleLogOut}
+            handleMenuClose={handleMenuClose} />
     );
-
 
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" color='secondary'>
                 <Toolbar>
-                    {/* <NavLink to={"/"} > */}
                     <Typography
                         variant="h6"
                         noWrap
@@ -141,7 +99,6 @@ const NavbarComp = () => {
                     >
                         CARDIFY
                     </Typography>
-                    {/* </NavLink> */}
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, marginLeft: { xs: '0', md: '0.5rem' } }}>
                         <MenuItem>
                             <Typography textAlign="center">Test</Typography>

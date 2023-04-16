@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import EditIcon from '@mui/icons-material/Edit';
@@ -18,6 +18,7 @@ import FieldComponent from '../components/FieldComponent';
 import { registerFieldsArray } from './RegisterPage/registerFieldsArray';
 import { feildValidation } from '../validation/feildValidation';
 import ROUTES from '../routes/ROUTES';
+import CancelBtnComp from '../components/CancelBtnComp';
 
 
 const ProfilePage = () => {
@@ -26,6 +27,7 @@ const ProfilePage = () => {
     const [formError, setFormError] = useState({});
     const [fieldToFocus, setFieldToFocus] = useState(0);
     const [formValid, setFormValid] = useState(false);
+    const navigate = useNavigate();
 
     const handleFocus = (event) => {
         setFieldToFocus(registerFieldsArray.findIndex(field => field.name === event.target.name));
@@ -33,7 +35,7 @@ const ProfilePage = () => {
 
     const validateForm = () => {
         for (const field of registerFieldsArray) {
-            if (field.required && (!formData[field.name] || formError[field.name])) {
+            if (field.name !== 'password' && field.required && (!formData[field.name] || formError[field.name])) {
                 return false;
             }
         }
@@ -59,6 +61,7 @@ const ProfilePage = () => {
         (async () => {
             try {
                 const { data } = await axios.get("/users/userInfo")
+                console.log(data);
                 setFormData(data);
             } catch (err) {
                 console.log(err);
@@ -84,8 +87,9 @@ const ProfilePage = () => {
             return
         }
         try {
-            await axios.post("/users/register", formData);
-            toast.success(`Welcome ${formData.firstName}! The registration was successful`);
+            await axios.put("/users/userInfo", { ...formData, _id: '' });
+            toast.success(`The updating was successful`);
+            navigate(ROUTES.HOME)
         } catch (err) {
             toast.error(err.response.data);
         }
@@ -129,7 +133,7 @@ const ProfilePage = () => {
                                     id='biz'
                                     onChange={handleChange}
                                     onFocus={handleFocus} />}
-                                label="Register as buissnes user"
+                                label="Buissnes user"
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -139,9 +143,9 @@ const ProfilePage = () => {
                                 variant="contained"
                                 color='secondary'
                                 disabled={!formValid}
-                                sx={{ mt: 1, mb: 2 }}
+                                sx={{ mt: 1, mb: { xs: 0, md: 2 } }}
                             >
-                                Sign Up
+                                Update
                             </Button>
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -150,21 +154,15 @@ const ProfilePage = () => {
                                 fullWidth
                                 variant="contained"
                                 color='secondary'
-                                sx={{ mt: 1, mb: 2 }}
+                                sx={{ mb: 1, mt: { xs: 0, md: 2 } }}
                                 onClick={restForm}
                             >
                                 <RestartAltIcon /> Rest Form
                             </Button>
                         </Grid>
                     </Grid>
-                    <Grid container justifyContent="flex-end">
-                        <Grid item>
-                            <Link to={ROUTES.LOGIN} variant="body2">
-                                Already have an account? Sign in
-                            </Link>
-                        </Grid>
-                    </Grid>
                 </Box>
+                <CancelBtnComp />
             </Box>
         </Container>
 

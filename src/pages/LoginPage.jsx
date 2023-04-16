@@ -18,6 +18,7 @@ import FieldComponent from '../components/FieldComponent';
 import { feildValidation } from '../validation/feildValidation';
 import ROUTES from '../routes/ROUTES';
 import useLoggedIn from '../hooks/useLoggedIn';
+import CancelBtnComp from '../components/CancelBtnComp';
 
 const loginFieldsArray = [
     {
@@ -143,6 +144,7 @@ const LoginPage = () => {
                         >
                             Sign In
                         </Button>
+                        <CancelBtnComp />
                     </Grid>
                     <Grid container justifyContent={"flex-end"}>
                         <Grid item>
