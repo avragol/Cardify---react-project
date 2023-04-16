@@ -15,7 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import NavbarComp from "./components/Navbar/NavbarComp";
 import FooterComp from "./components/FooterComp";
-import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import Router from "./routes/Router";
 
 const light = {
   palette: {
@@ -57,7 +57,7 @@ const App = () => {
         minHeight: '100vh',
       }}>
         <header><NavbarComp /></header>
-        <main><RegisterPage /></main>
+        <main><Router /></main>
         <FooterComp />
       </Container>
     </ThemeProvider>

@@ -1,25 +1,20 @@
 import * as React from 'react';
+import { NavLink } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreIcon from '@mui/icons-material/MoreVert';
 import { useSelector, useDispatch } from 'react-redux';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 
-
-
 import SearchPartial from "./SearchPartial";
 import MobileMenuPartial from './MobileMenuPartial';
+import NavLinkComponent from './NavLinkComponent';
 import { darkModeActions } from "../../store/DarkMode";
 
 const NavbarComp = () => {
@@ -44,8 +39,6 @@ const NavbarComp = () => {
         setAnchorEl(null);
     };
 
-
-    const menuId = 'primary-search-account-menu';
     const renderProfileMenu = (
         <Menu
             anchorEl={anchorEl}
@@ -53,7 +46,7 @@ const NavbarComp = () => {
                 vertical: 'top',
                 horizontal: 'right',
             }}
-            id={menuId}
+            id='account-menu'
             keepMounted
             transformOrigin={{
                 vertical: 'top',
@@ -62,8 +55,9 @@ const NavbarComp = () => {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+                <NavLinkComponent url={"/register"} label={"Sign Up"} />
+            </MenuItem>
         </Menu>
     );
 
@@ -72,14 +66,19 @@ const NavbarComp = () => {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" color='secondary'>
                 <Toolbar>
+                    {/* <NavLink to={"/"} > */}
                     <Typography
                         variant="h6"
                         noWrap
-                        component="div"
+                        component={NavLink}
+                        to="/"
                         fontWeight={700}
+                        color={"white"}
+                        style={{ textDecoration: 'none' }}
                     >
                         CARDIFY
                     </Typography>
+                    {/* </NavLink> */}
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, marginLeft: { xs: '0', md: '0.5rem' } }}>
                         {/*  {pages.map((page) => (
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
@@ -96,7 +95,7 @@ const NavbarComp = () => {
                         size="large"
                         edge="end"
                         aria-label="account of current user"
-                        aria-controls={menuId}
+                        aria-controls={"account-menu"}
                         aria-haspopup="true"
                         onClick={handleModeTheme}
                         color="inherit"
@@ -107,7 +106,7 @@ const NavbarComp = () => {
                         size="large"
                         edge="end"
                         aria-label="account of current user"
-                        aria-controls={menuId}
+                        aria-controls={"account-menu"}
                         aria-haspopup="true"
                         onClick={handleProfileMenuOpen}
                         color="inherit"
