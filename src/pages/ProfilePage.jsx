@@ -61,7 +61,6 @@ const ProfilePage = () => {
         (async () => {
             try {
                 const { data } = await axios.get("/users/userInfo")
-                console.log(data);
                 setFormData(data);
             } catch (err) {
                 console.log(err);
@@ -89,6 +88,9 @@ const ProfilePage = () => {
         try {
             await axios.put("/users/userInfo", { ...formData, _id: '' });
             toast.success(`The updating was successful`);
+            setTimeout(() => {
+                toast.info(`If your permissions have been updated, log out and log back in.`)
+            }, 1000)
             navigate(ROUTES.HOME)
         } catch (err) {
             toast.error(err.response.data);
@@ -154,7 +156,7 @@ const ProfilePage = () => {
                                 fullWidth
                                 variant="contained"
                                 color='secondary'
-                                sx={{ mb: 1, mt: { xs: 0, md: 2 } }}
+                                sx={{ mt: 1, mb: { xs: 0, md: 2 } }}
                                 onClick={restForm}
                             >
                                 <RestartAltIcon /> Rest Form
