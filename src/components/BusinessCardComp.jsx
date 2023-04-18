@@ -17,7 +17,7 @@ import PopoverComp from "./PopoverComp";
 
 
 
-const BusinessCardComp = ({ card }) => {
+const BusinessCardComp = ({ card, onDelete }) => {
     const [dialogOpen, setDialogOpen] = React.useState(false)
     const payload = useSelector((state) => state.authSlice.payload)
     const isLoggedIn = useSelector((state) => state.authSlice.isLoggedIn)
@@ -39,6 +39,7 @@ const BusinessCardComp = ({ card }) => {
                 toast.success(`Added`);
             } else {
                 toast.success(`Removed`);
+                onDelete(card._id)
             }
 
             setIsMarked(!isMarked);

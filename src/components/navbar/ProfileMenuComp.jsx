@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 import ROUTES from '../../routes/ROUTES';
 
-const ProfileMenuComp = ({ anchorEl, isMenuOpen, handleMenuClose, handleLogOut }) => {
+const ProfileMenuComp = ({ anchorEl, isMenuOpen, handleMenuClose, handleLogOut, name }) => {
     return (
         <Menu
             anchorEl={anchorEl}
@@ -22,12 +22,24 @@ const ProfileMenuComp = ({ anchorEl, isMenuOpen, handleMenuClose, handleLogOut }
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
+            <Typography
+                variant="button"
+                sx={{
+                    display: "block",
+                    paddingX: "0.3rem",
+                    textAlign: "center",
+                    textTransform: 'none'
+                }}
+                onClick={handleMenuClose}>
+                Hi {name}!
+            </Typography>
             <MenuItem onClick={handleMenuClose}>
                 <Typography
                     variant="button"
                     sx={{
                         display: "block",
                         paddingX: "0.3rem",
+                        textTransform: 'none'
                     }}
                     color="#9C27B0"
                     onClick={handleLogOut}>
@@ -42,6 +54,7 @@ const ProfileMenuComp = ({ anchorEl, isMenuOpen, handleMenuClose, handleLogOut }
                         sx={{
                             display: "block",
                             paddingX: "0.1rem",
+                            textTransform: 'none'
                         }}
                         color="#9C27B0"
                     >

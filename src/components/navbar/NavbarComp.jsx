@@ -37,6 +37,7 @@ const notAuthPages = [
 const NavbarComp = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [avatar, setAvatar] = React.useState(null);
+    const [userName, setUserName] = React.useState(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isDarkMode = useSelector(
@@ -52,6 +53,7 @@ const NavbarComp = () => {
                     url: userInfo.data.imageUrl,
                     alt: userInfo.data.imageAlt
                 });
+                setUserName(userInfo.data.firstName)
             })
             .catch((err) => console.log(err));
     }, [isLoggedIn]);
@@ -82,7 +84,8 @@ const NavbarComp = () => {
             anchorEl={anchorEl}
             isMenuOpen={isMenuOpen}
             handleLogOut={handleLogOut}
-            handleMenuClose={handleMenuClose} />
+            handleMenuClose={handleMenuClose}
+            name={userName} />
     );
 
     return (
@@ -104,8 +107,13 @@ const NavbarComp = () => {
                         <MenuItem>
                             <Typography textAlign="center">Test</Typography>
                         </MenuItem>
+                        {isLoggedIn ?
+                            <MenuItem>
+                                <NavLinkComponent url={ROUTES.FAV} label={"Favourites"} />
+                            </MenuItem>
+                            : ""}
                     </Box>
-                    <MobileMenuPartial /* {...pages} */ />
+                    <MobileMenuPartial />
                     <Box sx={{ flexGrow: 1 }} />
                     <SearchPartial />
                     <IconButton

@@ -3,7 +3,8 @@ const ROUTES = {
     FAKEHOME: "/home",
     REGISTER: "/register",
     LOGIN: "/login",
-    PROFILE: "profile",
+    PROFILE: "/profile",
+    FAV: "/fav",
     ADDCARD: "/addcard"
 }
 

@@ -1,19 +1,24 @@
 import { Box, Container, Typography, CircularProgress, Grid, Carousel } from "@mui/material"
 import { Fragment, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 import BusinessCardComp from "../components/BusinessCardComp";
-import CarouselComp from "../components/CarouselComp";
 
-const HomePage = () => {
-    const [cardsState, setCardsState] = useState(null)
+
+const FavoritesPage = () => {
+    const [cardsState, setCardsState] = useState(null);
+    const payload = useSelector((state) => state.authSlice.payload)
     useEffect(() => {
         (async () => {
             const { data } = await axios.get("/cards/cards")
-            console.log(data);
-            setCardsState(data);
+            setCardsState(data.filter((card) => card.likes.includes(payload._id)));
         })()
     }, [])
+
+    const deleteFromDisplay = (id) => {
+        setCardsState(cardsState.filter((card) => card._id !== id));
+    }
     return (
         <Fragment>
             <Container maxWidth="sm"
@@ -25,29 +30,16 @@ const HomePage = () => {
                     color="text.primary"
                     gutterBottom
                 >
-                    Cardify
-                </Typography>
-                <Typography
-                    component="h2"
-                    variant="h5"
-                    align="center"
-                    color="text.primary"
-                    gutterBottom
-                >
-                    Organize, Share, and Connect with Ease
-                </Typography>
-                <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                    Cardify - the digital solution for organizing and sharing business cards. Scan, store, and access cards from any device. Simplify your networking experience and never miss a follow-up opportunity again.
+                    Your Favorites Cards
                 </Typography>
             </Container>
-            {/* <CarouselComp /> */}
             <Container maxWidth="md"
                 sx={{ my: 2, display: "flex" }}>
                 <Grid container spacing={2} justifyContent={"flex-start"} alignItems={"center"}>
                     {cardsState ?
                         cardsState.map((card) =>
                             <Grid item md={4} xs={12} key={`bizCrd-${card._id}`}>
-                                <BusinessCardComp card={card} onDelete={() => { }} />
+                                <BusinessCardComp card={card} onDelete={deleteFromDisplay} />
                             </Grid>
                         )
                         : <CircularProgress />}
@@ -56,4 +48,5 @@ const HomePage = () => {
         </Fragment>
     )
 }
-export default HomePage;
+
+export default FavoritesPage;
