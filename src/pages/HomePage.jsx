@@ -1,3 +1,5 @@
+/* IMPORTANAT!!! check every change if its rellvant to fav or my cards */
+
 import { Box, Container, Typography, CircularProgress, Grid, Carousel } from "@mui/material"
 import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
@@ -21,7 +23,6 @@ const HomePage = () => {
                     component="h1"
                     variant="h2"
                     align="center"
-                    color="text.primary"
                     gutterBottom
                 >
                     Cardify

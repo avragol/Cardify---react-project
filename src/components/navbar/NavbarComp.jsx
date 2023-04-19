@@ -45,6 +45,9 @@ const NavbarComp = () => {
     );
     const isLoggedIn = useSelector(
         (bigPie) => bigPie.authSlice.isLoggedIn)
+    const payload = useSelector(
+        (bigPie) => bigPie.authSlice.payload)
+
 
     React.useEffect(() => {
         axios.get("/users/userInfo")
@@ -110,6 +113,11 @@ const NavbarComp = () => {
                         {isLoggedIn ?
                             <MenuItem>
                                 <NavLinkComponent url={ROUTES.FAV} label={"Favourites"} />
+                            </MenuItem>
+                            : ""}
+                        {payload && payload.biz ?
+                            <MenuItem>
+                                <NavLinkComponent url={ROUTES.MYCARDS} label={"My-Cards"} />
                             </MenuItem>
                             : ""}
                     </Box>
