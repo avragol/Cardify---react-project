@@ -1,4 +1,4 @@
-import { Box, Container, Typography, CircularProgress, Grid, Carousel } from "@mui/material"
+import { Container, Typography, CircularProgress, Grid } from "@mui/material"
 import { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -12,9 +12,10 @@ const FavoritesPage = () => {
     useEffect(() => {
         (async () => {
             const { data } = await axios.get("/cards/cards")
-            setCardsState(data.filter((card) => card.likes.includes(payload._id)));
+            const filterdData = data.filter((card) => card.likes.includes(payload._id))
+            setCardsState(filterdData);
         })()
-    }, [])
+    }, []);
 
     const deleteFromDisplay = (id) => {
         setCardsState(cardsState.filter((card) => card._id !== id));
@@ -39,7 +40,8 @@ const FavoritesPage = () => {
                     {cardsState ?
                         cardsState.map((card) =>
                             <Grid item md={4} xs={12} key={`bizCrd-${card._id}`}>
-                                <BusinessCardComp card={card} onDelete={deleteFromDisplay} />
+                                <BusinessCardComp card={card}
+                                    onDelete={deleteFromDisplay} />
                             </Grid>
                         )
                         : <CircularProgress />}

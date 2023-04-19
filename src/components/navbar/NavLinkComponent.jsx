@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { Typography } from "@mui/material";
+import { Typography, useTheme } from "@mui/material";
 
 const NavLinkComponent = ({ url, label }) => {
+
+    const theme = useTheme();
+
     return (
         <NavLink key={url} to={url}
         >
@@ -11,7 +14,9 @@ const NavLinkComponent = ({ url, label }) => {
                     sx={{
                         display: "block",
                         paddingX: "0.1rem",
+                        textTransform: 'none'
                     }}
+                    color={theme.palette.primary.main}
                 >
                     {label}
                 </Typography>)

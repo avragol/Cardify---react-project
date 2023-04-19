@@ -21,7 +21,7 @@ const BusinessCardComp = ({ card, onDelete }) => {
     const [dialogOpen, setDialogOpen] = React.useState(false)
     const payload = useSelector((state) => state.authSlice.payload)
     const isLoggedIn = useSelector((state) => state.authSlice.isLoggedIn)
-    const [isMarked, setIsMarked] = React.useState(card.likes.includes(payload._id))
+    const [isMarked, setIsMarked] = React.useState(payload && card.likes.includes(payload._id))
 
     const phoneIcon = <PhoneIcon />
 

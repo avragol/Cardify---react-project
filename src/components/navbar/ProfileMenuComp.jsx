@@ -1,11 +1,16 @@
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
 import ROUTES from '../../routes/ROUTES';
+import NavLinkComponent from './NavLinkComponent';
 
 const ProfileMenuComp = ({ anchorEl, isMenuOpen, handleMenuClose, handleLogOut, name }) => {
+
+    const theme = useTheme();
+
     return (
         <Menu
             anchorEl={anchorEl}
@@ -41,26 +46,13 @@ const ProfileMenuComp = ({ anchorEl, isMenuOpen, handleMenuClose, handleLogOut, 
                         paddingX: "0.3rem",
                         textTransform: 'none'
                     }}
-                    color="#9C27B0"
+                    color={theme.palette.primary.main}
                     onClick={handleLogOut}>
                     Sign Out
                 </Typography>
             </MenuItem>
             <MenuItem onClick={handleMenuClose}>
-                <NavLink to={ROUTES.PROFILE}
-                >
-                    <Typography
-                        variant="button"
-                        sx={{
-                            display: "block",
-                            paddingX: "0.1rem",
-                            textTransform: 'none'
-                        }}
-                        color="#9C27B0"
-                    >
-                        Profile
-                    </Typography>
-                </NavLink >
+                <NavLinkComponent url={ROUTES.PROFILE} label={"Profile"} />
             </MenuItem>
         </Menu>
     )

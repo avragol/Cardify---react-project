@@ -3,7 +3,6 @@ import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 
 import BusinessCardComp from "../components/BusinessCardComp";
-import CarouselComp from "../components/CarouselComp";
 
 const HomePage = () => {
     const [cardsState, setCardsState] = useState(null)
@@ -40,7 +39,6 @@ const HomePage = () => {
                     Cardify - the digital solution for organizing and sharing business cards. Scan, store, and access cards from any device. Simplify your networking experience and never miss a follow-up opportunity again.
                 </Typography>
             </Container>
-            {/* <CarouselComp /> */}
             <Container maxWidth="md"
                 sx={{ my: 2, display: "flex" }}>
                 <Grid container spacing={2} justifyContent={"flex-start"} alignItems={"center"}>
