@@ -7,7 +7,6 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt"
 import { cardFormFieldsArray } from './cardFormFieldsArray';
 import { feildValidation } from '../../validation/feildValidation';
 import FieldComponent from '../FieldComponent';
-import CancelBtnComp from '../CancelBtnComp';
 import reconfigurationCard from '../../utils/reconfigurationCard';
 
 const CardForm = ({ onClose, edit, card }) => {
@@ -18,7 +17,7 @@ const CardForm = ({ onClose, edit, card }) => {
 
     useEffect(() => {
         if (edit) {
-            setFormData(card)
+            setFormData(reconfigurationCard(card))
         }
     }, [])
     useEffect(() => {
@@ -68,15 +67,19 @@ const CardForm = ({ onClose, edit, card }) => {
         }
         try {
             if (edit) {
-
+                onClose((await axios.put(`/cards/${card._id}`, reconfigurationCard(formData))).data);
+                toast.success(`The ${formData.title} business card was successfully edited!`);
             } else {
-                await axios.post("/cards", reconfigurationCard(formData));
-                // toast.success(`Welcome ${formData.firstName}! The registration was successful`);
+                console.log(formData);
+                onClose((await axios.post("/cards", formData)).data);
+                toast.success(`The ${formData.title} business card was successfully added!`);
+
             }
         } catch (err) {
+            //console.log(err);
             toast.error(err.response.data);
         }
-        onClose();
+
     };
     return (
         <Box component={"form"} onSubmit={handleSubmit}>

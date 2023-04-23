@@ -1,27 +1,45 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Card, CardHeader, CardContent, CardMedia, CardActions, Button, Typography, IconButton, CardActionArea } from "@mui/material";
+import { Card, CardHeader, CardContent, CardMedia, CardActions, Button, Typography, IconButton, CardActionArea, CircularProgress } from "@mui/material";
+import { AppBar, Toolbar, Container } from "@mui/material";
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogActions from '@mui/material/DialogActions';
+import { Slide } from "@mui/material";
 import PhoneIcon from '@mui/icons-material/Phone';
+import CloseIcon from '@mui/icons-material/Close';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { toast } from "react-toastify";
 import axios from "axios";
 
 import reconfigurationCard from "../utils/reconfigurationCard";
 import PopoverComp from "./PopoverComp";
+import CardForm from "./CardForm/CardForm";
 
+const Transition = React.forwardRef((props, ref) => {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
-
-const BusinessCardComp = ({ card, onDelete }) => {
-    const [dialogOpen, setDialogOpen] = React.useState(false)
-    const payload = useSelector((state) => state.authSlice.payload)
+const BusinessCardComp = ({ cardFromParent, onDelete }) => {
+    const [dialogOpen, setDialogOpen] = React.useState(false);
+    const [card, setCard] = React.useState(null);
+    const [isMyCard, setIsMyCard] = React.useState(false);
+    const [editDialogOpen, setEditDialogOpen] = React.useState(false);
+    const payload = useSelector((state) => state.authSlice.payload);
     const isLoggedIn = useSelector((state) => state.authSlice.isLoggedIn)
-    const [isMarked, setIsMarked] = React.useState(payload && card.likes.includes(payload._id))
+    const [isMarked, setIsMarked] = React.useState(false);
+    React.useEffect(() => {
+        setCard(cardFromParent);
+    }, []);
+    React.useEffect(() => {
+        setIsMyCard(payload && card && card.user_id === payload._id);
+        setIsMarked(payload && card && card.likes.includes(payload._id))
+    }, [card]);
 
     const phoneIcon = <PhoneIcon />
 
@@ -46,9 +64,23 @@ const BusinessCardComp = ({ card, onDelete }) => {
         } catch (err) {
             console.log(err);
         }
+    };
+
+    const handleEditClick = () => {
+        setEditDialogOpen(true)
     }
 
+    const handleDeleteClick = () => { }
 
+    const handleClose = (newCard) => {
+        setEditDialogOpen(false);
+        console.log(newCard);
+        setCard(newCard);
+    }
+
+    if (!card) {
+        return <CircularProgress />
+    }
     return (
         <React.Fragment>
             <Card square raised>
@@ -72,6 +104,14 @@ const BusinessCardComp = ({ card, onDelete }) => {
                         <IconButton onClick={handleLikeClick}>
                             {isMarked ?
                                 <BookmarkRemoveIcon /> : <BookmarkAddIcon />}
+                        </IconButton>}
+                    {isMyCard &&
+                        <IconButton onClick={handleEditClick}>
+                            <EditNoteIcon />
+                        </IconButton>}
+                    {(isMyCard || (payload && payload.isAdmin)) &&
+                        <IconButton onClick={handleDeleteClick}>
+                            <DeleteForeverIcon />
                         </IconButton>}
                 </CardActions>
             </Card>
@@ -117,6 +157,31 @@ const BusinessCardComp = ({ card, onDelete }) => {
                 <DialogActions>
                     <Button onClick={closeCardDescription}>Close</Button>
                 </DialogActions>
+            </Dialog>
+            <Dialog
+                fullScreen
+                open={editDialogOpen}
+                onClose={handleClose}
+                TransitionComponent={Transition}
+            >
+                <AppBar sx={{ position: 'relative' }} color='secondary'>
+                    <Toolbar>
+                        <IconButton
+                            edge="start"
+                            color="inherit"
+                            onClick={handleClose}
+                            aria-label="close"
+                        >
+                            <CloseIcon />
+                        </IconButton>
+                        <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                            Edit card
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <Container maxWidth={"md"} sx={{ mt: 3 }}>
+                    <CardForm onClose={handleClose} edit={true} card={card} />
+                </Container>
             </Dialog>
         </React.Fragment>
     );

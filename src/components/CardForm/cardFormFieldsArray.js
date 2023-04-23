@@ -57,7 +57,7 @@ export const cardFormFieldsArray = [
     },
     {
         label: "Image Alt",
-        name: "imageAlt",
+        name: "alt",
         id: "imageAlt",
         type: "text",
         sm: 6,
@@ -66,7 +66,7 @@ export const cardFormFieldsArray = [
     },
     {
         label: "Image URL",
-        name: "imageUrl",
+        name: "url",
         id: "imageUrl",
         type: "url",
         sm: 6,

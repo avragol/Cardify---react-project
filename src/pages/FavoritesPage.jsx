@@ -39,7 +39,7 @@ const FavoritesPage = () => {
                     {cardsState ?
                         cardsState.map((card) =>
                             <Grid item md={4} xs={12} key={`bizCrd-${card._id}`}>
-                                <BusinessCardComp card={card}
+                                <BusinessCardComp cardFromParent={card}
                                     onDelete={deleteFromDisplay} />
                             </Grid>
                         )

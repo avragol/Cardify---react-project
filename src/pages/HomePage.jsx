@@ -46,7 +46,7 @@ const HomePage = () => {
                     {cardsState ?
                         cardsState.map((card) =>
                             <Grid item md={4} xs={12} key={`bizCrd-${card._id}`}>
-                                <BusinessCardComp card={card} onDelete={() => { }} />
+                                <BusinessCardComp cardFromParent={card} onDelete={() => { }} />
                             </Grid>
                         )
                         : <CircularProgress />}

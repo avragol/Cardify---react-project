@@ -11,13 +11,11 @@ import axios from "axios";
 import AddIcon from "@mui/icons-material/Add";
 
 import BusinessCardComp from "../components/BusinessCardComp";
-import FieldComponent from '../components/FieldComponent';
-import ROUTES from '../routes/ROUTES';
-import CancelBtnComp from '../components/CancelBtnComp';
 import CardForm from "../components/CardForm/CardForm";
+import reconfigurationCard from "../utils/reconfigurationCard";
 
 
-const Transition = forwardRef(function Transition(props, ref) {
+const Transition = forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
@@ -44,8 +42,9 @@ const MyCardsPage = () => {
         setAddDialogOpen(true);
     };
 
-    const handleClose = () => {
+    const handleClose = (newCard) => {
         setAddDialogOpen(false);
+        setCardsState([...cardsState, newCard ? newCard : ""])
     };
 
     return (
@@ -73,7 +72,7 @@ const MyCardsPage = () => {
                     {cardsState ?
                         cardsState.map((card) =>
                             <Grid item md={4} xs={12} key={`bizCrd-${card._id}`}>
-                                <BusinessCardComp card={card}
+                                <BusinessCardComp cardFromParent={card}
                                     onDelete={deleteFromDisplay} />
                             </Grid>
                         )
