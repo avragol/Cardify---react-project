@@ -58,7 +58,7 @@ const NavbarComp = () => {
                 });
                 setUserName(userInfo.data.firstName)
             })
-            .catch((err) => console.log(err));
+            .catch((err) => { });
     }, [isLoggedIn]);
 
     const isMenuOpen = Boolean(anchorEl);

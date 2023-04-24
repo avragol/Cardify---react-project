@@ -11,10 +11,13 @@ const HomePage = () => {
     useEffect(() => {
         (async () => {
             const { data } = await axios.get("/cards/cards")
-            console.log(data);
             setCardsState(data);
         })()
     }, [])
+
+    const handleDeleteFromDisplay = (id) => {
+        setCardsState(cardsState.filter((card) => card._id !== id))
+    }
     return (
         <Fragment>
             <Container maxWidth="sm"
@@ -46,7 +49,10 @@ const HomePage = () => {
                     {cardsState ?
                         cardsState.map((card) =>
                             <Grid item md={4} xs={12} key={`bizCrd-${card._id}`}>
-                                <BusinessCardComp cardFromParent={card} onDelete={() => { }} />
+                                <BusinessCardComp
+                                    cardFromParent={card}
+                                    onUnMark={() => { }}
+                                    onDelete={handleDeleteFromDisplay} />
                             </Grid>
                         )
                         : <CircularProgress />}

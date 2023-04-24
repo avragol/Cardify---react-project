@@ -38,17 +38,15 @@ const CardForm = ({ onClose, edit, card }) => {
     };
 
     const handleChange = (event) => {
-        const { name, value, type, checked, id } = event.target;
-        if (type !== 'checkbox') {
-            const { joi, label } = cardFormFieldsArray.find(field => field.id === id);
-            setFormError({
-                ...formError,
-                [name]: feildValidation(joi, value, label)
-            });
-        }
+        const { name, value, id } = event.target;
+        const { joi, label } = cardFormFieldsArray.find(field => field.id === id);
+        setFormError({
+            ...formError,
+            [name]: feildValidation(joi, value, label)
+        });
         setFormData({
             ...formData,
-            [name]: type === 'checkbox' ? checked : value
+            [name]: value
         });
     };
 

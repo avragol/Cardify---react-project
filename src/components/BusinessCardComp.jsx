@@ -25,17 +25,17 @@ const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const BusinessCardComp = ({ cardFromParent, onDelete }) => {
+const BusinessCardComp = ({ cardFromParent, onUnMark, onDelete }) => {
     const [dialogOpen, setDialogOpen] = React.useState(false);
-    const [card, setCard] = React.useState(null);
+    const [card, setCard] = React.useState(cardFromParent);
     const [isMyCard, setIsMyCard] = React.useState(false);
     const [editDialogOpen, setEditDialogOpen] = React.useState(false);
     const payload = useSelector((state) => state.authSlice.payload);
     const isLoggedIn = useSelector((state) => state.authSlice.isLoggedIn)
     const [isMarked, setIsMarked] = React.useState(false);
-    React.useEffect(() => {
+    /* React.useEffect(() => {
         setCard(cardFromParent);
-    }, []);
+    }, []); */
     React.useEffect(() => {
         setIsMyCard(payload && card && card.user_id === payload._id);
         setIsMarked(payload && card && card.likes.includes(payload._id))
@@ -57,7 +57,7 @@ const BusinessCardComp = ({ cardFromParent, onDelete }) => {
                 toast.success(`Added`);
             } else {
                 toast.success(`Removed`);
-                onDelete(card._id)
+                onUnMark(card._id)
             }
 
             setIsMarked(!isMarked);
@@ -70,12 +70,23 @@ const BusinessCardComp = ({ cardFromParent, onDelete }) => {
         setEditDialogOpen(true)
     }
 
-    const handleDeleteClick = () => { }
+    const handleDeleteClick = async () => {
+        try {
+            await axios.delete(`/cards/${card._id}`);
+            onDelete(card._id)
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
-    const handleClose = (newCard) => {
+    const handleClose = (ev, newCard) => {
         setEditDialogOpen(false);
         console.log(newCard);
-        setCard(newCard);
+        if (newCard) {
+            console.log("here?");
+            setCard(newCard);
+        }
+        console.log(card);
     }
 
     if (!card) {
@@ -83,14 +94,31 @@ const BusinessCardComp = ({ cardFromParent, onDelete }) => {
     }
     return (
         <React.Fragment>
+
             <Card square raised>
                 <CardActionArea onClick={openCardDescription}>
                     <CardMedia component="img" title="Alt text" image={card.image.url} />
+                    {isMyCard && (
+                        <Typography
+                            sx={{
+                                backgroundColor: "green",
+                                color: "white",
+                                padding: "2px 6px",
+                                borderRadius: "5px",
+                                marginTop: "5px",
+                                width: "max-content",
+                                marginX: "auto"
+                            }}
+                        >
+                            Your card!
+                        </Typography>
+                    )}
                     <CardHeader
                         title={card.title}
                         subheader={card.subTitle}
                     />
                     <CardContent>
+
                         <Typography variant="body1" sx={{ mb: 1 }}>{card.description}</Typography>
                         <Typography variant="body2">
                             {card.country}, {card.city}, {card.street} {card.houseNumber}

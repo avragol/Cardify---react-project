@@ -42,6 +42,10 @@ const MyCardsPage = () => {
         setAddDialogOpen(true);
     };
 
+    const handleCloseWithoutAdd = () => {
+        setAddDialogOpen(false);
+    };
+
     const handleClose = (newCard) => {
         setAddDialogOpen(false);
         setCardsState([...cardsState, newCard ? newCard : ""])
@@ -72,7 +76,9 @@ const MyCardsPage = () => {
                     {cardsState ?
                         cardsState.map((card) =>
                             <Grid item md={4} xs={12} key={`bizCrd-${card._id}`}>
-                                <BusinessCardComp cardFromParent={card}
+                                <BusinessCardComp
+                                    cardFromParent={card}
+                                    onUnMark={() => { }}
                                     onDelete={deleteFromDisplay} />
                             </Grid>
                         )
@@ -90,7 +96,7 @@ const MyCardsPage = () => {
                         <IconButton
                             edge="start"
                             color="inherit"
-                            onClick={handleClose}
+                            onClick={handleCloseWithoutAdd}
                             aria-label="close"
                         >
                             <CloseIcon />
