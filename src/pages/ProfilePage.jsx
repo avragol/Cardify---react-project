@@ -17,8 +17,10 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import FieldComponent from '../components/FieldComponent';
 import { registerFieldsArray } from './RegisterPage/registerFieldsArray';
 import { feildValidation } from '../validation/feildValidation';
+import reconfigurationUser from '../utils/recofigurationUser';
 import ROUTES from '../routes/ROUTES';
 import CancelBtnComp from '../components/CancelBtnComp';
+import useLoggedIn from '../hooks/useLoggedIn';
 
 
 const ProfilePage = () => {
@@ -28,6 +30,24 @@ const ProfilePage = () => {
     const [fieldToFocus, setFieldToFocus] = useState(0);
     const [formValid, setFormValid] = useState(false);
     const navigate = useNavigate();
+    const loggedIn = useLoggedIn();
+    useEffect(() => {
+        (async () => {
+            try {
+                const { data } = await axios.get("/users/userInfo")
+                setFormData(data);
+                //setFormData({ biz: data.biz })
+                //console.log(formData);
+            } catch (err) {
+                console.log(err);
+            }
+        })();
+    }, [])
+
+    useEffect(() => {
+        setFormValid(validateForm());
+    }, [formData, formError]);
+
 
     const handleFocus = (event) => {
         setFieldToFocus(registerFieldsArray.findIndex(field => field.name === event.target.name));
@@ -55,22 +75,9 @@ const ProfilePage = () => {
             ...formData,
             [name]: type === 'checkbox' ? checked : value
         });
+        console.log(formData.biz);
     };
 
-    useEffect(() => {
-        (async () => {
-            try {
-                const { data } = await axios.get("/users/userInfo")
-                setFormData(data);
-            } catch (err) {
-                console.log(err);
-            }
-        })();
-    }, [])
-
-    useEffect(() => {
-        setFormValid(validateForm());
-    }, [formData, formError]);
 
     const restForm = () => {
         setFormData({});
@@ -86,13 +93,17 @@ const ProfilePage = () => {
             return
         }
         try {
-            await axios.put("/users/userInfo", { ...formData, _id: '' });
+            localStorage.setItem("userToken",
+                (await axios.put("/users/userInfo", reconfigurationUser(formData))).data.token
+            );
+            loggedIn();
             toast.success(`The updating was successful`);
             setTimeout(() => {
                 toast.info(`If your permissions have been updated, log out and log back in.`)
             }, 1000)
             navigate(ROUTES.HOME)
         } catch (err) {
+            console.log(err);
             toast.error(err.response.data);
         }
     };
@@ -129,7 +140,7 @@ const ProfilePage = () => {
                         <Grid item xs={12}>
                             <FormControlLabel
                                 control={<Checkbox
-                                    checked={formData.isBusinessUser}
+                                    checked={formData.biz ? true : false}
                                     color="secondary"
                                     name="biz"
                                     id='biz'

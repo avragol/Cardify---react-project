@@ -1,0 +1,8 @@
+button img {
+    filter: grayscale(80%);
+    transition: filter 300ms;
+}
+
+button:hover img {
+    filter: grayscale(0%);
+}

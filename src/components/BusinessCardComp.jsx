@@ -123,7 +123,7 @@ const BusinessCardComp = ({ cardFromParent, onUnMark, onDelete }) => {
                         <Typography variant="body2">
                             {card.country}, {card.city}, {card.street} {card.houseNumber}
                         </Typography>
-                        <Typography variant="body2">Email: {card.email}</Typography>
+                        <Typography variant="body2"><b>Email:</b> {card.email}</Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions sx={{ display: "flex", justifyContent: "space-around" }}>
