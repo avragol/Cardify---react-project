@@ -1,7 +1,10 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+
+import ROUTES from '../../routes/ROUTES'
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -55,6 +58,29 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const SearchPartial = () => {
+    //const [currentUrl, setCurrentUrl] = React.useState(window.location.href);
+    const [searchInput, setSearchInput] = React.useState("");
+    const navigate = useNavigate();
+    const handleSearchChange = (e) => {
+        setSearchInput(e.target.value);
+
+    };
+    React.useEffect(() => {
+
+    }, [])
+    React.useEffect(() => {
+        let currentUrl = window.location.href;
+        if (currentUrl.includes(ROUTES.FAV)) {
+            currentUrl = ROUTES.FAV;
+        } else if (currentUrl.includes(ROUTES.MYCARDS)) {
+            currentUrl = ROUTES.MYCARDS;
+        } else {
+            currentUrl = ROUTES.HOME;
+        }
+        navigate(`${currentUrl}?filter=${searchInput}`);
+    }, [searchInput]);
+
+
     return (
         <Search>
             <SearchIconWrapper>
@@ -63,6 +89,8 @@ const SearchPartial = () => {
             <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ 'aria-label': 'search' }}
+                onChange={handleSearchChange}
+                value={searchInput}
             />
         </Search>
     )

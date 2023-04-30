@@ -4,18 +4,45 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 import BusinessCardComp from "../components/BusinessCardComp";
+import useQueryParams from "../hooks/useQueryParams";
 
 
 const FavoritesPage = () => {
+    const [originalCardsArr, setOriginalCardsArr] = useState(null);
     const [cardsState, setCardsState] = useState(null);
+    let qparams = useQueryParams();
     const payload = useSelector((state) => state.authSlice.payload)
     useEffect(() => {
         (async () => {
             const { data } = await axios.get("/cards/cards")
             const filterdData = data.filter((card) => card.likes.includes(payload._id))
-            setCardsState(filterdData);
+            filterFunc(filterdData);
         })()
     }, []);
+    useEffect(() => {
+        filterFunc()
+    }, [qparams.filter])
+
+    const filterFunc = (data) => {
+        if (!originalCardsArr && !data) {
+            return;
+        }
+        let filter = "";
+        if (qparams.filter) {
+            filter = qparams.filter;
+        }
+        if (!originalCardsArr && data) {
+            setOriginalCardsArr(data);
+            setCardsState(data.filter((card) => card.title.startsWith(filter) || card.bizNumber.startsWith(filter)));
+            return;
+        }
+        if (originalCardsArr) {
+            let newOriginalCardsArr = JSON.parse(JSON.stringify(originalCardsArr));
+            setCardsState(
+                newOriginalCardsArr.filter((card) => card.title.startsWith(filter) || card.bizNumber.startsWith(filter))
+            );
+        }
+    };
 
     const deleteFromDisplay = (id) => {
         setCardsState(cardsState.filter((card) => card._id !== id));

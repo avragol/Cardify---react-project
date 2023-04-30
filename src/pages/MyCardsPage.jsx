@@ -12,6 +12,7 @@ import AddIcon from "@mui/icons-material/Add";
 
 import BusinessCardComp from "../components/BusinessCardComp";
 import CardForm from "../components/CardForm/CardForm";
+import useQueryParams from "../hooks/useQueryParams";
 import reconfigurationCard from "../utils/reconfigurationCard";
 
 
@@ -20,19 +21,43 @@ const Transition = forwardRef((props, ref) => {
 });
 
 const MyCardsPage = () => {
+    const [originalCardsArr, setOriginalCardsArr] = useState(null);
     const [cardsState, setCardsState] = useState(null);
     const [addDialogOpen, setAddDialogOpen] = useState(false);
     const theme = useTheme();
+    const qparams = useQueryParams();
     const payload = useSelector((state) => state.authSlice.payload)
     useEffect(() => {
         (async () => {
             const { data } = await axios.get("/cards/cards")
             const filterdData = data.filter((card) => card.user_id === payload._id)
-            setCardsState(filterdData);
+            filterFunc(filterdData);
         })()
     }, []);
+    useEffect(() => {
+        filterFunc()
+    }, [qparams.filter])
 
-
+    const filterFunc = (data) => {
+        if (!originalCardsArr && !data) {
+            return;
+        }
+        let filter = "";
+        if (qparams.filter) {
+            filter = qparams.filter;
+        }
+        if (!originalCardsArr && data) {
+            setOriginalCardsArr(data);
+            setCardsState(data.filter((card) => card.title.startsWith(filter) || card.bizNumber.startsWith(filter)));
+            return;
+        }
+        if (originalCardsArr) {
+            let newOriginalCardsArr = JSON.parse(JSON.stringify(originalCardsArr));
+            setCardsState(
+                newOriginalCardsArr.filter((card) => card.title.startsWith(filter) || card.bizNumber.startsWith(filter))
+            );
+        }
+    };
 
     const deleteFromDisplay = (id) => {
         setCardsState(cardsState.filter((card) => card._id !== id));

@@ -95,7 +95,7 @@ const ProfilePage = () => {
                 (await axios.put("/users/userInfo", reconfigurationUser(formData))).data.token
             );
             loggedIn();
-            toast.success(`The updating was successful`);
+            toast.success(`The update was successful`);
             navigate(ROUTES.HOME)
         } catch (err) {
             console.log(err);

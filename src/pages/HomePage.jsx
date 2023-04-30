@@ -5,15 +5,47 @@ import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 
 import BusinessCardComp from "../components/BusinessCardComp";
+import useQueryParams from "../hooks/useQueryParams";
 
 const HomePage = () => {
-    const [cardsState, setCardsState] = useState(null)
+    const [originalCardsArr, setOriginalCardsArr] = useState(null);
+    const [cardsState, setCardsState] = useState(null);
+    let qparams = useQueryParams();
     useEffect(() => {
         (async () => {
-            const { data } = await axios.get("/cards/cards")
-            setCardsState(data);
+            try {
+                const { data } = await axios.get("/cards/cards")
+                filterFunc(data);
+            } catch (err) {
+                console.log(err);
+            }
         })()
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        filterFunc();
+    }, [qparams.filter])
+
+    const filterFunc = (data) => {
+        if (!originalCardsArr && !data) {
+            return;
+        }
+        let filter = "";
+        if (qparams.filter) {
+            filter = qparams.filter;
+        }
+        if (!originalCardsArr && data) {
+            setOriginalCardsArr(data);
+            setCardsState(data.filter((card) => card.title.startsWith(filter) || card.bizNumber.startsWith(filter)));
+            return;
+        }
+        if (originalCardsArr) {
+            let newOriginalCardsArr = JSON.parse(JSON.stringify(originalCardsArr));
+            setCardsState(
+                newOriginalCardsArr.filter((card) => card.title.startsWith(filter) || card.bizNumber.startsWith(filter))
+            );
+        }
+    };
 
     const handleDeleteFromDisplay = (id) => {
         setCardsState(cardsState.filter((card) => card._id !== id))

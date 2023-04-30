@@ -1,7 +1,5 @@
 import { useSearchParams } from "react-router-dom";
 
-
-//create a custom hook!
 const useQueryParams = () => {
     let [searchParams, setSearchParams] = useSearchParams();
     let query = {};
