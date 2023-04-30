@@ -36,8 +36,6 @@ const ProfilePage = () => {
             try {
                 const { data } = await axios.get("/users/userInfo")
                 setFormData(data);
-                //setFormData({ biz: data.biz })
-                //console.log(formData);
             } catch (err) {
                 console.log(err);
             }
@@ -98,9 +96,6 @@ const ProfilePage = () => {
             );
             loggedIn();
             toast.success(`The updating was successful`);
-            setTimeout(() => {
-                toast.info(`If your permissions have been updated, log out and log back in.`)
-            }, 1000)
             navigate(ROUTES.HOME)
         } catch (err) {
             console.log(err);

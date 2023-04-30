@@ -30,11 +30,13 @@ const dark = {
   },
 };
 
+
 const App = () => {
+  const loggedIn = useLoggedIn();
+  useEffect(() => {
+    loggedIn();
+  }, [loggedIn]);
 
-  //toast.info("Welcome! (only test)", { autoClose: 2000 })
-
-  useLoggedIn()();
 
   const isDarkTheme = useSelector(
     (bigPie) => bigPie.darkModeSlice.isDarkMode
@@ -49,7 +51,6 @@ const App = () => {
         newestOnTop={false}
         closeOnClick
         rtl={false}
-        pauseOnFocusLoss
         draggable
         pauseOnHover
         theme="colored"

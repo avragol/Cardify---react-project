@@ -26,7 +26,6 @@ export const registerFieldsArray = [
         type: "text",
         sm: 4,
         required: true,
-
         joi: Joi.string().min(2).max(15).required(),
     },
     {

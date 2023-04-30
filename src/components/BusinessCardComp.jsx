@@ -20,6 +20,7 @@ import axios from "axios";
 import reconfigurationCard from "../utils/reconfigurationCard";
 import PopoverComp from "./PopoverComp";
 import CardForm from "./CardForm/CardForm";
+import DialogPartial from "./DialogPartial";
 
 const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -33,9 +34,7 @@ const BusinessCardComp = ({ cardFromParent, onUnMark, onDelete }) => {
     const payload = useSelector((state) => state.authSlice.payload);
     const isLoggedIn = useSelector((state) => state.authSlice.isLoggedIn)
     const [isMarked, setIsMarked] = React.useState(false);
-    /* React.useEffect(() => {
-        setCard(cardFromParent);
-    }, []); */
+    const [updateLikes, setUpdateLikes] = React.useState(0);
     React.useEffect(() => {
         setIsMyCard(payload && card && card.user_id === payload._id);
         setIsMarked(payload && card && card.likes.includes(payload._id))
@@ -55,8 +54,10 @@ const BusinessCardComp = ({ cardFromParent, onUnMark, onDelete }) => {
             await axios.patch(`/cards/card-like/${card._id}`);
             if (!isMarked) {
                 toast.success(`Added`);
+                setUpdateLikes(updateLikes + 1)
             } else {
                 toast.success(`Removed`);
+                setUpdateLikes(updateLikes - 1)
                 onUnMark(card._id)
             }
 
@@ -144,44 +145,7 @@ const BusinessCardComp = ({ cardFromParent, onUnMark, onDelete }) => {
                 </CardActions>
             </Card>
             <Dialog open={dialogOpen} onClose={closeCardDescription}>
-                <DialogTitle>{card.title}</DialogTitle>
-                <DialogContent>
-                    {card.image && (
-                        <img src={card.image.url} alt={card.image.alt} width={"100%"} />
-                    )}
-                    {card.subTitle && (
-                        <Typography variant="subtitle1" gutterBottom>
-                            {card.subTitle}
-                        </Typography>
-                    )}
-                    {card.description && (
-                        <DialogContentText>{card.description}</DialogContentText>
-                    )}
-                    {card.country && card.city && card.street && card.houseNumber && (
-                        <DialogContentText>
-                            <b>Address:</b> {card.country}, {card.city}, {card.street} {card.houseNumber}
-                        </DialogContentText>
-                    )}
-                    {card.phone && (
-                        <DialogContentText><b>Phone:</b> {card.phone}</DialogContentText>
-                    )}
-                    {card.email && (
-                        <DialogContentText><b>Email:</b> {card.email}</DialogContentText>
-                    )}
-                    {card.bizNumber && (
-                        <DialogContentText><b>Biz Number:</b> {card.bizNumber}</DialogContentText>
-                    )}
-                    {card.likes && (
-                        <DialogContentText>
-                            <b>Likes:</b> {card.likes.length}
-                        </DialogContentText>
-                    )}
-                    {card.createdAt && (
-                        <DialogContentText>
-                            <b>Created At:</b> {new Date(card.createdAt).toLocaleDateString()}
-                        </DialogContentText>
-                    )}
-                </DialogContent>
+                <DialogPartial card={{ ...card }} likes={card.likes.length + updateLikes} />
                 <DialogActions>
                     <Button onClick={closeCardDescription}>Close</Button>
                 </DialogActions>

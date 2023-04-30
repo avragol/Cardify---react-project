@@ -4,6 +4,7 @@ import { Typography, useTheme } from "@mui/material";
 const NavLinkComponent = ({ url, label }) => {
 
     const theme = useTheme();
+    const isDarkMode = theme.palette.mode === "dark";
 
     return (
         <NavLink key={url} to={url}
@@ -14,9 +15,11 @@ const NavLinkComponent = ({ url, label }) => {
                     sx={{
                         display: "block",
                         paddingX: "0.1rem",
-                        textTransform: 'none'
+                        textTransform: 'none',
+                        textDecoration: "none",
+                        fontWeight: isDarkMode ? "400" : "500"
                     }}
-                    color={theme.palette.primary.main}
+                    color={"white"}
                 >
                     {label}
                 </Typography>)
