@@ -19,7 +19,7 @@ const DialogPartial = ({ card, likes }) => {
                 )}
                 {card.country && card.city && card.street && card.houseNumber && (
                     <DialogContentText>
-                        <b>Address:</b> {card.country}, {card.city}, {card.street} {card.houseNumber}
+                        <b>Address:</b> {card.state}, {card.country}, {card.city}, {card.street} {card.houseNumber}
                     </DialogContentText>
                 )}
                 {card.phone && (
@@ -27,6 +27,9 @@ const DialogPartial = ({ card, likes }) => {
                 )}
                 {card.email && (
                     <DialogContentText><b>Email:</b> {card.email}</DialogContentText>
+                )}
+                {card.web && (
+                    <DialogContentText><b>Web:</b>{card.web}</DialogContentText>
                 )}
                 {card.bizNumber && (
                     <DialogContentText><b>Biz Number:</b> {card.bizNumber}</DialogContentText>

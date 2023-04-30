@@ -80,7 +80,7 @@ const BusinessCardComp = ({ cardFromParent, onUnMark, onDelete }) => {
         }
     }
 
-    const handleClose = (ev, newCard) => {
+    const handleClose = (newCard) => {
         setEditDialogOpen(false);
         console.log(newCard);
         if (newCard) {

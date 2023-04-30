@@ -65,7 +65,8 @@ const CardForm = ({ onClose, edit, card }) => {
         }
         try {
             if (edit) {
-                onClose((await axios.put(`/cards/${card._id}`, reconfigurationCard(formData))).data);
+                let newCard = (await axios.put(`/cards/${card._id}`, reconfigurationCard(formData))).data
+                onClose(newCard);
                 toast.success(`The ${formData.title} business card was successfully edited!`);
             } else {
                 console.log(formData);
