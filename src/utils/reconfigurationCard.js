@@ -1,10 +1,10 @@
+import { imgUrlValidation } from "../validation/imgUrlValidation";
+
 const reconfigurationCard = (card) => {
     return {
         title: card.title,
         subTitle: card.subTitle,
         description: card.description,
-        url: card.url || card.image.url,
-        alt: card.alt || card.image.alt,
         web: card.web,
         state: card.state,
         country: card.country,
@@ -13,6 +13,12 @@ const reconfigurationCard = (card) => {
         houseNumber: card.houseNumber,
         phone: card.phone,
         email: card.email,
+        alt: card.alt || card.image.alt,
+        url: checkUrl(card.url || card.image.url),
     }
+}
+
+const checkUrl = async (url) => {
+    return imgUrlValidation(url).then((result) => result ? url : "")
 }
 export default reconfigurationCard;
