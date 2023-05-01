@@ -6,6 +6,7 @@ import LoginPage from "../pages/LoginPage";
 import ProfilePage from "../pages/ProfilePage";
 import FavoritesPage from "../pages/FavoritesPage";
 import MyCardsPage from "../pages/MyCardsPage";
+import SandboxPage from "../pages/SandboxPage";
 
 
 const Router = () => {
@@ -18,6 +19,9 @@ const Router = () => {
             <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
             <Route path={ROUTES.FAV} element={<FavoritesPage />} />
             <Route path={ROUTES.MYCARDS} element={<MyCardsPage />} />
+            <Route path={ROUTES.SANDBOX} element={<SandboxPage />}>
+
+            </Route>
             <Route path="*" element={<span><h1>404</h1><p>Opsss... page not found</p></span>} />
         </Routes>
     )

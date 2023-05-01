@@ -60,15 +60,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const SearchPartial = () => {
     //const [currentUrl, setCurrentUrl] = React.useState(window.location.href);
     const [searchInput, setSearchInput] = React.useState("");
+    const [isFirstRendering, setIsFirstRendering] = React.useState(true);
     const navigate = useNavigate();
+
     const handleSearchChange = (e) => {
         setSearchInput(e.target.value);
 
     };
     React.useEffect(() => {
-
-    }, [])
-    React.useEffect(() => {
+        if (isFirstRendering) {
+            setIsFirstRendering(false);
+            return;
+        }
         let currentUrl = window.location.href;
         if (currentUrl.includes(ROUTES.FAV)) {
             currentUrl = ROUTES.FAV;

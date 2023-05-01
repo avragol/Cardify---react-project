@@ -61,6 +61,7 @@ const MobileMenuPartial = ({ pages }) => {
                     backgroundColor: theme.palette.secondary.main,
                 }}>
                     {pages.map((page) => (
+                        page &&
                         <MenuItem key={page.url} onClick={handleCloseNavMenu}>
                             <NavLinkComponent url={page.url} label={page.label} />
                         </MenuItem>
