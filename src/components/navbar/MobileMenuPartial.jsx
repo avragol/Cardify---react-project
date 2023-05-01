@@ -5,11 +5,16 @@ import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useTheme } from '@mui/styles';
+
+import NavLinkComponent from './NavLinkComponent';
 
 
-const MobileMenuPartial = (pages) => {
+
+const MobileMenuPartial = ({ pages }) => {
 
     const [anchorElNav, setAnchorElNav] = useState(null);
+    const theme = useTheme();
 
     const handleOpenNavMobileMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -19,7 +24,10 @@ const MobileMenuPartial = (pages) => {
     }
 
     return (
-        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+        <Box sx={{
+            flexGrow: 1,
+            display: { xs: 'flex', md: 'none' },
+        }}>
             <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -46,16 +54,18 @@ const MobileMenuPartial = (pages) => {
                 onClose={handleCloseNavMenu}
                 sx={{
                     display: { xs: 'block', md: 'none' },
+
                 }}
             >
-                <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">Test</Typography>
-                </MenuItem>
-                {/* {pages.map((page) => (
-                    <MenuItem key={page.url} onClick={handleCloseNavMenu}>
-                        <Typography textAlign="center">{page.label}</Typography>
-                    </MenuItem>
-                ))} */}
+                <Box sx={{
+                    backgroundColor: theme.palette.secondary.main,
+                }}>
+                    {pages.map((page) => (
+                        <MenuItem key={page.url} onClick={handleCloseNavMenu}>
+                            <NavLinkComponent url={page.url} label={page.label} />
+                        </MenuItem>
+                    ))}
+                </Box>
             </Menu>
         </Box>
     )

@@ -107,9 +107,6 @@ const NavbarComp = () => {
                         CARDIFY
                     </Typography>
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, marginLeft: { xs: '0', md: '0.5rem' } }}>
-                        <MenuItem>
-                            <Typography textAlign="center">Test</Typography>
-                        </MenuItem>
                         {isLoggedIn ?
                             <MenuItem>
                                 <NavLinkComponent url={ROUTES.FAV} label={"Favourites"} />
@@ -121,7 +118,15 @@ const NavbarComp = () => {
                             </MenuItem>
                             : ""}
                     </Box>
-                    <MobileMenuPartial />
+                    <MobileMenuPartial pages={[
+                        isLoggedIn && {
+                            url: ROUTES.FAV,
+                            label: "Favourites"
+                        },
+                        payload && payload.biz && {
+                            url: ROUTES.MYCARDS,
+                            label: "My-Cards"
+                        }]} />
                     <Box sx={{ flexGrow: 1 }} />
                     <SearchPartial />
                     <IconButton
