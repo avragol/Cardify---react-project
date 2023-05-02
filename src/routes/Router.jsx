@@ -20,7 +20,10 @@ const Router = () => {
             <Route path={ROUTES.FAV} element={<FavoritesPage />} />
             <Route path={ROUTES.MYCARDS} element={<MyCardsPage />} />
             <Route path={ROUTES.SANDBOX} element={<SandboxPage />}>
-
+                <Route path={"nestedpage1"} element={<h1>1</h1>} />
+                <Route path={"nestedpage2"} element={<h1>2</h1>} />
+                <Route path={"nestedpage3"} element={<h1>3</h1>} />
+                <Route path={"nestedpage4"} element={<h1>4</h1>} />
             </Route>
             <Route path="*" element={<span><h1>404</h1><p>Opsss... page not found</p></span>} />
         </Routes>
