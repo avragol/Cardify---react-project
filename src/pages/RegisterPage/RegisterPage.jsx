@@ -146,7 +146,7 @@ const RegisterPage = () => {
                                 sx={{ mb: 1, mt: { xs: 0, md: 2 } }}
                                 onClick={restForm}
                             >
-                                <RestartAltIcon /> Rest Form
+                                <RestartAltIcon /> Reset Form
                             </Button>
                         </Grid>
                     </Grid>
