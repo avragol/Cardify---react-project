@@ -107,6 +107,9 @@ const NavbarComp = () => {
                         CARDIFY
                     </Typography>
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, marginLeft: { xs: '0', md: '0.5rem' } }}>
+                        <MenuItem>
+                            <NavLinkComponent url={ROUTES.ABOUT} label={"About Us"} />
+                        </MenuItem>
                         {isLoggedIn &&
                             <MenuItem>
                                 <NavLinkComponent url={ROUTES.FAV} label={"Favourites"} />

@@ -10,6 +10,7 @@ import SandboxPage from "../pages/SandboxPage/SandboxPage";
 import HarryPotterPage from "../pages/SandboxPage/HarryPotterPage";
 import UseMemo from "../pages/SandboxPage/UseMemo";
 import ReRenderPage from "../pages/SandboxPage/ReRenderPage";
+import AboutPage from "../pages/AboutPage";
 
 
 const Router = () => {
@@ -17,6 +18,7 @@ const Router = () => {
         <Routes>
             <Route path={ROUTES.HOME} element={<HomePage />} />
             <Route path={ROUTES.FAKEHOME} element={<Navigate to={ROUTES.HOME} />} />
+            <Route path={ROUTES.ABOUT} element={<AboutPage />} />
             <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
             <Route path={ROUTES.LOGIN} element={<LoginPage />} />
             <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
