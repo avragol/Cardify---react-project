@@ -124,6 +124,10 @@ const NavbarComp = () => {
                             </MenuItem>}
                     </Box>
                     <MobileMenuPartial pages={[
+                        {
+                            url: ROUTES.ABOUT,
+                            label: "About Us"
+                        },
                         isLoggedIn && {
                             url: ROUTES.FAV,
                             label: "Favourites"
@@ -131,7 +135,11 @@ const NavbarComp = () => {
                         payload && payload.biz && {
                             url: ROUTES.MYCARDS,
                             label: "My-Cards"
-                        }]} />
+                        },
+                        payload && payload.isAdmin && {
+                            url: ROUTES.SANDBOX,
+                            label: "Sandbox"
+                        },]} />
                     <Box sx={{ flexGrow: 1 }} />
                     <SearchPartial />
                     <IconButton
