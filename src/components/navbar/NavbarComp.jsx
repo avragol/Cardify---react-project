@@ -90,7 +90,6 @@ const NavbarComp = () => {
             handleMenuClose={handleMenuClose}
             name={userName} />
     );
-
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" color='secondary'>
@@ -122,6 +121,10 @@ const NavbarComp = () => {
                             <MenuItem>
                                 <NavLinkComponent url={ROUTES.SANDBOX} label={"Sandbox"} />
                             </MenuItem>}
+                        {payload && payload.isAdmin &&
+                            <MenuItem>
+                                <NavLinkComponent url={ROUTES.CRM} label={"CRM"} />
+                            </MenuItem>}
                     </Box>
                     <MobileMenuPartial pages={[
                         {
@@ -139,6 +142,10 @@ const NavbarComp = () => {
                         payload && payload.isAdmin && {
                             url: ROUTES.SANDBOX,
                             label: "Sandbox"
+                        },
+                        payload && payload.isAdmin && {
+                            url: ROUTES.CRM,
+                            label: "CRM"
                         },]} />
                     <Box sx={{ flexGrow: 1 }} />
                     <SearchPartial />
@@ -167,7 +174,6 @@ const NavbarComp = () => {
                                     alt={avatar.alt}
                                     src={avatar.url}
                                 />
-
                             }
                         </IconButton>
                         :
@@ -183,7 +189,6 @@ const NavbarComp = () => {
                                 )}
                             </Box>
                         </React.Fragment>
-
                     }
                 </Toolbar>
             </AppBar>
@@ -191,5 +196,4 @@ const NavbarComp = () => {
         </Box >
     );
 }
-
 export default NavbarComp;

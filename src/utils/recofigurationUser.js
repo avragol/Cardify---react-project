@@ -1,12 +1,10 @@
-import { imgUrlValidation } from "../validation/imgUrlValidation";
-
 const reconfigurationUser = (user) => {
     return {
         firstName: user.firstName,
         lastName: user.lastName,
         phone: user.phone,
         email: user.email,
-        imageUrl: checkUrl(user.imageUrl),
+        imageUrl: user.imageUrl,
         imageAlt: user.imageAlt,
         state: user.state,
         country: user.country,
@@ -18,7 +16,4 @@ const reconfigurationUser = (user) => {
     }
 };
 
-const checkUrl = async (url) => {
-    return imgUrlValidation(url).then((result) => result ? url : "")
-}
 export default reconfigurationUser;

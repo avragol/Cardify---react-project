@@ -1,5 +1,3 @@
-import { imgUrlValidation } from "../validation/imgUrlValidation";
-
 const reconfigurationCard = (card) => {
     return {
         title: card.title,
@@ -14,11 +12,8 @@ const reconfigurationCard = (card) => {
         phone: card.phone,
         email: card.email,
         alt: card.alt || card.image.alt,
-        url: checkUrl(card.url || card.image.url),
+        url: card.url || card.image.url,
     }
 }
 
-const checkUrl = async (url) => {
-    return imgUrlValidation(url).then((result) => result ? url : "")
-}
 export default reconfigurationCard;

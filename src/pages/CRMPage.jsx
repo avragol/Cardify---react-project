@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { makeStyles } from '@mui/styles';
 import {
     Table,
@@ -6,14 +7,11 @@ import {
     TableHead,
     TableBody,
     TableRow,
-    TableCell,
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogActions,
-    Button,
-    TextField,
+    TableCell
 } from '@mui/material';
+
+import UserDialog from '../components/UserDialog';
+import reconfigurationUser from '../utils/recofigurationUser';
 
 const useStyles = makeStyles({
     tableContainer: {
@@ -34,11 +32,6 @@ const useStyles = makeStyles({
     },
 });
 
-const usersData = [
-    { id: 1, name: 'John Doe', isBusinessUser: true, isAdmin: false, email: 'john.doe@example.com' },
-    { id: 2, name: 'Jane Smith', isBusinessUser: true, isAdmin: true, email: 'jane.smith@example.com' },
-    // Add more users as needed
-];
 
 const CRMPage = () => {
     const classes = useStyles();
@@ -48,37 +41,51 @@ const CRMPage = () => {
     const [editedUser, setEditedUser] = useState(null);
 
     useEffect(() => {
-        // Simulating server call to fetch users data
-        // Replace this with your actual server call
-        setUsers(usersData);
+        (async () => {
+            try {
+                const { data } = await axios.get("/users/getAllUsers");
+                setUsers(data.users);
+            } catch (err) {
+                console.log(err);
+            }
+        })()
     }, []);
 
     const handleRowClick = (user) => {
         setSelectedUser(user);
+        setEditedUser(user);
         setDialogOpen(true);
     };
 
-    const handleEditClick = () => {
-        setEditedUser(selectedUser);
-    };
-
-    const handleSaveClick = () => {
-        // Simulating server call to save edited user data
-        // Replace this with your actual server call
-
-        // Update the users array with edited user
-        setUsers((prevUsers) =>
-            prevUsers.map((user) => (user.id === editedUser.id ? editedUser : user))
-        );
-
+    const handleSaveClick = async () => {
+        console.log(editedUser);
+        try {
+            axios.put(`users/userInfo/${editedUser._id}`, reconfigurationUser(editedUser));
+            setUsers((prevUsers) =>
+                prevUsers.map((user) => (user._id === editedUser._id ? editedUser : user))
+            );
+        } catch (err) {
+            console.log(err);
+        }
         setDialogOpen(false);
         setEditedUser(null);
     };
-
     const handleCancelClick = () => {
         setDialogOpen(false);
         setEditedUser(null);
     };
+    const handleDeleteClick = async () => {
+        try {
+            await axios.delete(`users/deleteUser/${selectedUser._id}`);
+            setUsers((prevUsers) =>
+                prevUsers.filter((user) => (user._id !== selectedUser._id)));
+            setDialogOpen(false);
+            setEditedUser(null);
+        } catch (err) {
+            console.log(err);
+        }
+
+    }
 
     return (
         <div>
@@ -86,7 +93,7 @@ const CRMPage = () => {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>ID</TableCell>
+                            <TableCell sx={{ display: { xs: "none", md: "block" } }}>ID</TableCell>
                             <TableCell>Name</TableCell>
                             <TableCell>Is Business User</TableCell>
                             <TableCell>Is Admin</TableCell>
@@ -95,12 +102,12 @@ const CRMPage = () => {
                     </TableHead>
                     <TableBody>
                         {users.map((user) => (
-                            <TableRow key={user.id}
+                            <TableRow key={user._id}
                                 onClick={() => handleRowClick(user)}
                                 className={[classes.pointerCursor, classes.hoverEffect].join(' ')}>
-                                <TableCell>{user.id}</TableCell>
-                                <TableCell>{user.name}</TableCell>
-                                <TableCell>{user.isBusinessUser ? 'Yes' : 'No'}</TableCell>
+                                <TableCell sx={{ display: { xs: "none", md: "block" } }}>{user._id}</TableCell>
+                                <TableCell>{user.firstName} {user.lastName}</TableCell>
+                                <TableCell>{user.biz ? 'Yes' : 'No'}</TableCell>
                                 <TableCell>{user.isAdmin ? 'Yes' : 'No'}</TableCell>
                                 <TableCell>{user.email}</TableCell>
                             </TableRow>
@@ -108,63 +115,18 @@ const CRMPage = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <UserDialog
+                open={dialogOpen}
+                onClose={handleCancelClick}
+                selectedUser={selectedUser}
+                editedUser={editedUser}
+                onEdit={setEditedUser}
+                onSave={handleSaveClick}
+                onCancel={handleCancelClick}
+                onDelete={handleDeleteClick}
+            />
 
-            <Dialog open={dialogOpen} onClose={handleCancelClick}>
-                <DialogTitle>User Details</DialogTitle>
-                <DialogContent className={classes.dialogContent}>
-                    {selectedUser && (
-                        <div>
-                            <div>ID: {selectedUser.id}</div>
-                            <TextField
-                                label="Name"
-                                value={editedUser ? editedUser.name : selectedUser.name}
-                                onChange={(e) =>
-                                    setEditedUser((prevUser) => ({
-                                        ...prevUser,
-                                        name: e.target.value,
-                                    }))
-                                }
-                            />
-                            <TextField
-                                label="Is Business User"
-                                value={editedUser ? editedUser.isBusinessUser : selectedUser.isBusinessUser}
-                                onChange={(e) =>
-                                    setEditedUser((prevUser) => ({
-                                        ...prevUser,
-                                        isBusinessUser: e.target.value,
-                                    }))
-                                }
-                            />
-                            <TextField
-                                label="Is Admin"
-                                value={editedUser ? editedUser.isAdmin : selectedUser.isAdmin}
-                                onChange={(e) =>
-                                    setEditedUser((prevUser) => ({
-                                        ...prevUser,
-                                        isAdmin: e.target.value,
-                                    }))
-                                }
-                            />
-                            <TextField
-                                label="Email"
-                                value={editedUser ? editedUser.email : selectedUser.email}
-                                onChange={(e) =>
-                                    setEditedUser((prevUser) => ({
-                                        ...prevUser,
-                                        email: e.target.value,
-                                    }))
-                                }
-                            />
-                        </div>
-                    )}
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleCancelClick}>Cancel</Button>
-                    <Button onClick={handleSaveClick} color="primary">
-                        Save
-                    </Button>
-                </DialogActions>
-            </Dialog>
+
 
         </div>
     );
