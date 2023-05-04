@@ -24,13 +24,10 @@ axios.defaults.baseURL = "/api";
 axios.interceptors.request.use((config) => {
   const token = localStorage.getItem("userToken");
   if (token) {
-    /*
-      if the token exists in localStorage
-      this mean that the user logged in and
-      we want to send the token in the headers with each request
-      that was send
-    */
-    config.headers["x-auth-token"] = token;
+    if (config.url !== "https://hp-api.onrender.com/api/spells") {
+      // Check if the request URL is not the specific URL that not need the header 
+      config.headers["x-auth-token"] = token;
+    }
   }
   return config; // send the new data
 });
