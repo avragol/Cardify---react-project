@@ -1,3 +1,1 @@
-##FIX PROFILE!!
-#finish add card
-#edit card
+##Add imgs to about page
