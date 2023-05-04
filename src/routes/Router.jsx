@@ -14,6 +14,7 @@ import HarryPotterPage from "../pages/SandboxPage/HarryPotterPage";
 import UseMemo from "../pages/SandboxPage/UseMemo";
 import ReRenderPage from "../pages/SandboxPage/ReRenderPage";
 import AboutPage from "../pages/AboutPage";
+import CRMPage from "../pages/CRMPage";
 
 
 const Router = () => {
@@ -25,6 +26,7 @@ const Router = () => {
             <Route path={ROUTES.ABOUT} element={<AboutPage />} />
             <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
             <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+            <Route path={ROUTES.CRM} element={<CRMPage />} />
             {/* pages for users only */}
             <Route path={ROUTES.PROFILE} element={
                 <LoggedProtectedRoute element={<ProfilePage />} />} />
