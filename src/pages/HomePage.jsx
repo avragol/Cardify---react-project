@@ -77,7 +77,7 @@ const HomePage = () => {
             </Container>
             <Container maxWidth="md"
                 sx={{ my: 2, display: "flex" }}>
-                <Grid container spacing={2} justifyContent={"flex-start"} alignItems={"center"}>
+                <Grid container spacing={2} justifyContent={"flex-start"} alignItems={"start"}>
                     {cardsState ?
                         cardsState.map((card) =>
                             <Grid item md={4} xs={12} key={`bizCrd-${card._id}`}>

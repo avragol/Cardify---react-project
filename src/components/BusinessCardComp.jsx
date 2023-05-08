@@ -86,6 +86,14 @@ const BusinessCardComp = ({ cardFromParent, onUnMark, onDelete }) => {
             setCard(newCard);
         }
     }
+    const handleGanarateBizNum = async () => {
+        try {
+            setCard((await axios.patch(`/cards/bizNumber/${card._id}`)).data);
+            setUpdateLikes(0);
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     if (!card) {
         return <CircularProgress />
@@ -145,6 +153,8 @@ const BusinessCardComp = ({ cardFromParent, onUnMark, onDelete }) => {
                 <DialogPartial card={{ ...card }} likes={card.likes.length + updateLikes} />
                 <DialogActions>
                     <Button onClick={closeCardDescription}>Close</Button>
+                    {payload && payload.isAdmin &&
+                        <Button onClick={handleGanarateBizNum}>Ganerate BizNum</Button>}
                 </DialogActions>
             </Dialog>
             <Dialog
