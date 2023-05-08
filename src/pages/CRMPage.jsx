@@ -36,7 +36,7 @@ const useStyles = makeStyles({
 const CRMPage = () => {
     const classes = useStyles();
     const [users, setUsers] = useState([]);
-    const [selectedUser, setSelectedUser] = useState(null);
+    const [selectedUser, setSelectedUser] = useState({});
     const [dialogOpen, setDialogOpen] = useState(false);
     const [editedUser, setEditedUser] = useState(null);
 

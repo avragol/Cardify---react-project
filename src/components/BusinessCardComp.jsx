@@ -82,7 +82,7 @@ const BusinessCardComp = ({ cardFromParent, onUnMark, onDelete }) => {
 
     const handleClose = (newCard) => {
         setEditDialogOpen(false);
-        if (newCard) {
+        if (!newCard._reactName) {
             setCard(newCard);
         }
     }
