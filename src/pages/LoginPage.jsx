@@ -55,6 +55,7 @@ const LoginPage = () => {
     const [formData, setFormData] = useState({});
     const [formError, setFormError] = useState({});
     const [fieldToFocus, setFieldToFocus] = useState(0);
+    const [failedCount, setFailedCount] = useState(0);
     const [formValid, setFormValid] = useState(false);
     const navigate = useNavigate();
     const loggedIn = useLoggedIn();
@@ -100,8 +101,9 @@ const LoginPage = () => {
             loggedIn();
             toast.success(`Welcome ${(await axios.get("/users/userInfo")).data.firstName}! Good to see you again`);
             navigate(ROUTES.HOME)
-        } catch (err) {
+        } catch (err) {//להמשיך חסימת ניסיון התחברות שגוי
             toast.error(err.response.data);
+            setFailedCount(failedCount + 1);
         }
     };
 
