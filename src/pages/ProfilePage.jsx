@@ -22,36 +22,38 @@ import ROUTES from '../routes/ROUTES';
 import CancelBtnComp from '../components/CancelBtnComp';
 import useLoggedIn from '../hooks/useLoggedIn';
 
-
 const ProfilePage = () => {
-
     const [formData, setFormData] = useState({});
     const [formError, setFormError] = useState({});
     const [fieldToFocus, setFieldToFocus] = useState(0);
     const [formValid, setFormValid] = useState(false);
     const navigate = useNavigate();
     const loggedIn = useLoggedIn();
+
     useEffect(() => {
+        // Fetch user data
         (async () => {
             try {
-                const { data } = await axios.get("/users/userInfo")
+                const { data } = await axios.get("/users/userInfo");
                 setFormData(data);
             } catch (err) {
                 console.log(err);
             }
         })();
-    }, [])
+    }, []);
 
     useEffect(() => {
+        // Update the form validity when the form data or form errors change
         setFormValid(validateForm());
     }, [formData, formError]);
 
-
     const handleFocus = (event) => {
+        // Set the field to focus based on the target name
         setFieldToFocus(registerFieldsArray.findIndex(field => field.name === event.target.name));
-    }
+    };
 
     const validateForm = () => {
+        // Validate the form by checking if all required fields have values and no form errors exist
         for (const field of registerFieldsArray) {
             if (field.name !== 'password' && field.required && (!formData[field.name] || formError[field.name])) {
                 return false;
@@ -61,6 +63,7 @@ const ProfilePage = () => {
     };
 
     const handleChange = (event) => {
+        // Handle form field changes and update form data and errors
         const { name, value, type, checked, id } = event.target;
         if (type !== 'checkbox') {
             const { joi, label } = registerFieldsArray.find(field => field.id === id);
@@ -76,29 +79,34 @@ const ProfilePage = () => {
         console.log(formData.biz);
     };
 
-
     const restForm = () => {
+        // Reset the form data, errors, and focus
         setFormData({});
         setFieldToFocus(0);
         setFormError({});
-        setFormValid(false)
-    }
+        setFormValid(false);
+    };
 
     const handleSubmit = async (event) => {
+        // Handle form submission
         event.preventDefault();
         if (!formValid) {
-            toast.info("don't piss me off!")
-            return
+            // Display an error message if the form is not valid
+            toast.info("Don't piss me off!");
+            return;
         }
         try {
+            // Update user info on the server
             localStorage.setItem("userToken",
                 (await axios.put("/users/userInfo", reconfigurationUser(formData))).data.token
             );
             loggedIn();
+            // Display a success message
             toast.success(`The update was successful`);
-            navigate(ROUTES.HOME)
+            navigate(ROUTES.HOME);
         } catch (err) {
             console.log(err);
+            // Display an error message if the update fails
             toast.error(err.response.data);
         }
     };
@@ -141,7 +149,7 @@ const ProfilePage = () => {
                                     id='biz'
                                     onChange={handleChange}
                                     onFocus={handleFocus} />}
-                                label="Buissnes user"
+                                label="Business user"
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -165,7 +173,7 @@ const ProfilePage = () => {
                                 sx={{ mt: { xs: 0, md: 1 }, mb: { xs: 1, md: 2 } }}
                                 onClick={restForm}
                             >
-                                <RestartAltIcon /> Rest Form
+                                <RestartAltIcon /> Reset Form
                             </Button>
                         </Grid>
                     </Grid>
@@ -173,8 +181,7 @@ const ProfilePage = () => {
                 <CancelBtnComp />
             </Box>
         </Container>
-
     );
-}
+};
 
 export default ProfilePage;
