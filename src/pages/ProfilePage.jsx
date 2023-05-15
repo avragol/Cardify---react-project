@@ -76,7 +76,6 @@ const ProfilePage = () => {
             ...formData,
             [name]: type === 'checkbox' ? checked : value
         });
-        console.log(formData.biz);
     };
 
     const restForm = () => {
