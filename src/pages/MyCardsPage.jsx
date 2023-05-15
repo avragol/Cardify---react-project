@@ -1,5 +1,4 @@
 import { Container, Typography, CircularProgress, Grid, IconButton, useTheme, Box } from "@mui/material"
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,9 +12,8 @@ import AddIcon from "@mui/icons-material/Add";
 import BusinessCardComp from "../components/BusinessCardComp";
 import CardForm from "../components/CardForm/CardForm";
 import useQueryParams from "../hooks/useQueryParams";
-import reconfigurationCard from "../utils/reconfigurationCard";
 
-
+// Transition component for the dialog
 const Transition = forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -27,16 +25,20 @@ const MyCardsPage = () => {
     const theme = useTheme();
     const qparams = useQueryParams();
     const payload = useSelector((state) => state.authSlice.payload)
+
     useEffect(() => {
+        // Fetch user's cards data from the server
         (async () => {
-            const { data } = await axios.get("/cards/cards")
-            const filterdData = data.filter((card) => card.user_id === payload._id)
+            const { data } = await axios.get("/cards/cards");
+            const filterdData = data.filter((card) => card.user_id === payload._id);
             filterFunc(filterdData);
-        })()
+        })();
     }, []);
+
     useEffect(() => {
-        filterFunc()
-    }, [qparams.filter])
+        // Trigger filter function when query parameters change
+        filterFunc();
+    }, [qparams.filter]);
 
     const filterFunc = (data) => {
         if (!originalCardsArr && !data) {
@@ -47,11 +49,13 @@ const MyCardsPage = () => {
             filter = qparams.filter;
         }
         if (!originalCardsArr && data) {
+            // Set the original cards array and apply the filter
             setOriginalCardsArr(data);
             setCardsState(data.filter((card) => card.title.startsWith(filter) || card.bizNumber.startsWith(filter)));
             return;
         }
         if (originalCardsArr) {
+            // Apply the filter on the original cards array
             let newOriginalCardsArr = JSON.parse(JSON.stringify(originalCardsArr));
             setCardsState(
                 newOriginalCardsArr.filter((card) => card.title.startsWith(filter) || card.bizNumber.startsWith(filter))
@@ -60,20 +64,24 @@ const MyCardsPage = () => {
     };
 
     const deleteFromDisplay = (id) => {
+        // Remove a card from the displayed cards state
         setCardsState(cardsState.filter((card) => card._id !== id));
     }
 
     const handleClickOpen = () => {
+        // Open the add card dialog
         setAddDialogOpen(true);
     };
 
     const handleCloseWithoutAdd = () => {
+        // Close the add card dialog without adding a new card
         setAddDialogOpen(false);
     };
 
     const handleClose = (newCard) => {
+        // Close the add card dialog and update the cards state with a new card if provided
         setAddDialogOpen(false);
-        setCardsState([...cardsState, newCard ? newCard : ""])
+        setCardsState([...cardsState, newCard ? newCard : ""]);
     };
 
     return (
@@ -91,23 +99,26 @@ const MyCardsPage = () => {
                     color="inherit"
                     size="large"
                     sx={{ backgroundColor: theme.palette.secondary.main }}
-                    onClick={handleClickOpen}>
+                    onClick={handleClickOpen}
+                >
                     <AddIcon />
                 </IconButton>
             </Container>
-            <Container maxWidth="md"
-                sx={{ my: 2, display: "flex" }}>
+            <Container maxWidth="md" sx={{ my: 2, display: "flex" }}>
                 <Grid container spacing={2} justifyContent={"flex-start"} alignItems={"center"}>
-                    {cardsState ?
-                        cardsState.map((card) =>
+                    {cardsState ? (
+                        cardsState.map((card) => (
                             <Grid item md={4} xs={12} key={`bizCrd-${card._id}`}>
                                 <BusinessCardComp
                                     cardFromParent={card}
                                     onUnMark={() => { }}
-                                    onDelete={deleteFromDisplay} />
+                                    onDelete={deleteFromDisplay}
+                                />
                             </Grid>
-                        )
-                        : <CircularProgress />}
+                        ))
+                    ) : (
+                        <CircularProgress />
+                    )}
                 </Grid>
             </Container>
             <Dialog
@@ -116,7 +127,7 @@ const MyCardsPage = () => {
                 onClose={handleClose}
                 TransitionComponent={Transition}
             >
-                <AppBar sx={{ position: 'relative' }} color='secondary'>
+                <AppBar sx={{ position: 'relative' }} color="secondary">
                     <Toolbar>
                         <IconButton
                             edge="start"
@@ -131,11 +142,12 @@ const MyCardsPage = () => {
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <Container maxWidth={"md"} sx={{ mt: 3 }}>
+                <Container maxWidth="md" sx={{ mt: 3 }}>
                     <CardForm onClose={handleClose} edit={false} />
                 </Container>
             </Dialog>
         </Fragment>
-    )
+    );
 };
+
 export default MyCardsPage;
