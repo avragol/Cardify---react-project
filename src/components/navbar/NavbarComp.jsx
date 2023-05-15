@@ -23,15 +23,10 @@ import { darkModeActions } from "../../store/DarkMode";
 import { authActions } from "../../store/auth";
 import ROUTES from '../../routes/ROUTES';
 
+// Array of pages accessible to non-authenticated users
 const notAuthPages = [
-    {
-        label: "Sign Up",
-        url: ROUTES.REGISTER
-    }
-    , {
-        label: "Sign In",
-        url: ROUTES.LOGIN
-    },
+    { label: "Sign Up", url: ROUTES.REGISTER },
+    { label: "Sign In", url: ROUTES.LOGIN },
 ];
 
 const NavbarComp = () => {
@@ -40,56 +35,57 @@ const NavbarComp = () => {
     const [userName, setUserName] = React.useState(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const isDarkMode = useSelector(
-        (bigPie) => bigPie.darkModeSlice.isDarkMode
-    );
-    const isLoggedIn = useSelector(
-        (bigPie) => bigPie.authSlice.isLoggedIn)
-    const payload = useSelector(
-        (bigPie) => bigPie.authSlice.payload)
-
+    const isDarkMode = useSelector((bigPie) => bigPie.darkModeSlice.isDarkMode);
+    const isLoggedIn = useSelector((bigPie) => bigPie.authSlice.isLoggedIn);
+    const payload = useSelector((bigPie) => bigPie.authSlice.payload);
 
     React.useEffect(() => {
+        // Fetch user information from the server upon login
         axios.get("/users/userInfo")
             .then((userInfo) => {
                 setAvatar({
                     url: userInfo.data.imageUrl,
                     alt: userInfo.data.imageAlt
                 });
-                setUserName(userInfo.data.firstName)
+                setUserName(userInfo.data.firstName);
             })
             .catch((err) => { });
     }, [isLoggedIn]);
-
     const isMenuOpen = Boolean(anchorEl);
-
     const handleModeTheme = () => {
-        dispatch(darkModeActions.changeTheme())
-    }
+        // Dispatch an action to toggle dark mode theme
+        dispatch(darkModeActions.changeTheme());
+    };
 
     const handleProfileMenuOpen = (event) => {
+        // Set the anchor element for the profile menu
         setAnchorEl(event.currentTarget);
     };
 
     const handleMenuClose = () => {
+        // Close the profile menu
         setAnchorEl(null);
     };
 
     const handleLogOut = () => {
-        dispatch(authActions.logOut())
-        localStorage.removeItem("userToken")
-        toast.success("Goodbye! see you leter")
-        navigate(ROUTES.HOME)
+        // Dispatch an action to log out the user
+        dispatch(authActions.logOut());
+        localStorage.removeItem("userToken");
+        toast.success("Goodbye! see you later");
+        navigate(ROUTES.HOME);
     };
 
+    // Render the profile menu component
     const renderProfileMenu = (
         <ProfileMenuComp
             anchorEl={anchorEl}
             isMenuOpen={isMenuOpen}
             handleLogOut={handleLogOut}
             handleMenuClose={handleMenuClose}
-            name={userName} />
+            name={userName}
+        />
     );
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" color='secondary'>
@@ -146,7 +142,8 @@ const NavbarComp = () => {
                         payload && payload.isAdmin && {
                             url: ROUTES.CRM,
                             label: "CRM"
-                        },]} />
+                        },
+                    ]} />
                     <Box sx={{ flexGrow: 1 }} />
                     <SearchPartial />
                     <IconButton
@@ -157,7 +154,8 @@ const NavbarComp = () => {
                         aria-haspopup="true"
                         onClick={handleModeTheme}
                         color="inherit"
-                    > {isDarkMode ? <DarkModeIcon /> : <LightModeIcon />}
+                    >
+                        {isDarkMode ? <DarkModeIcon /> : <LightModeIcon />}
                     </IconButton>
                     {isLoggedIn ?
                         <IconButton
@@ -193,7 +191,8 @@ const NavbarComp = () => {
                 </Toolbar>
             </AppBar>
             {renderProfileMenu}
-        </Box >
+        </Box>
     );
-}
+};
+
 export default NavbarComp;
