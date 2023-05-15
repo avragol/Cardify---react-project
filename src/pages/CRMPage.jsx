@@ -41,6 +41,7 @@ const CRMPage = () => {
     const [editedUser, setEditedUser] = useState(null);
 
     useEffect(() => {
+        // Fetch users data from the server
         (async () => {
             try {
                 const { data } = await axios.get("/users/getAllUsers");
@@ -52,13 +53,14 @@ const CRMPage = () => {
     }, []);
 
     const handleRowClick = (user) => {
+        // Set the selected user and open the dialog for editing
         setSelectedUser(user);
         setEditedUser(user);
         setDialogOpen(true);
     };
 
     const handleSaveClick = async () => {
-        console.log(editedUser);
+        // Save the edited user data
         try {
             axios.put(`users/userInfo/${editedUser._id}`, reconfigurationUser(editedUser));
             setUsers((prevUsers) =>
@@ -70,11 +72,15 @@ const CRMPage = () => {
         setDialogOpen(false);
         setEditedUser(null);
     };
+
     const handleCancelClick = () => {
+        // Cancel editing and close the dialog
         setDialogOpen(false);
         setEditedUser(null);
     };
+
     const handleDeleteClick = async () => {
+        // Delete the selected user
         try {
             await axios.delete(`users/deleteUser/${selectedUser._id}`);
             setUsers((prevUsers) =>
@@ -84,7 +90,6 @@ const CRMPage = () => {
         } catch (err) {
             console.log(err);
         }
-
     }
 
     return (
@@ -102,9 +107,11 @@ const CRMPage = () => {
                     </TableHead>
                     <TableBody>
                         {users.map((user) => (
-                            <TableRow key={user._id}
+                            <TableRow
+                                key={user._id}
                                 onClick={() => handleRowClick(user)}
-                                className={[classes.pointerCursor, classes.hoverEffect].join(' ')}>
+                                className={[classes.pointerCursor, classes.hoverEffect].join(' ')}
+                            >
                                 <TableCell sx={{ display: { xs: "none", md: "block" } }}>{user._id}</TableCell>
                                 <TableCell>{user.firstName} {user.lastName}</TableCell>
                                 <TableCell>{user.biz ? 'Yes' : 'No'}</TableCell>
@@ -125,9 +132,6 @@ const CRMPage = () => {
                 onCancel={handleCancelClick}
                 onDelete={handleDeleteClick}
             />
-
-
-
         </div>
     );
 };
