@@ -18,32 +18,37 @@ import FooterComp from "./components/FooterComp";
 import Router from "./routes/Router";
 import useLoggedIn from "./hooks/useLoggedIn";
 
+// Define light theme
 const light = {
   palette: {
     mode: "light",
   },
 };
 
+// Define dark theme
 const dark = {
   palette: {
     mode: "dark",
   },
 };
 
-
 const App = () => {
+  // Check if user is logged in
   const loggedIn = useLoggedIn();
   useEffect(() => {
     loggedIn();
   }, [loggedIn]);
 
-
+  // Get dark theme preference from Redux store
   const isDarkTheme = useSelector(
     (bigPie) => bigPie.darkModeSlice.isDarkMode
   );
+
   return (
     <ThemeProvider theme={isDarkTheme ? createTheme(dark) : createTheme(light)}>
       <CssBaseline />
+
+      {/* Toast container for displaying notifications */}
       <ToastContainer
         position="top-center"
         autoClose={3500}
@@ -55,6 +60,8 @@ const App = () => {
         pauseOnHover
         theme="colored"
       />
+
+      {/* Main app container */}
       <Container sx={{
         display: 'flex',
         flexDirection: 'column',
