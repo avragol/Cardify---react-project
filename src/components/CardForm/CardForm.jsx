@@ -16,18 +16,23 @@ const CardForm = ({ onClose, edit, card }) => {
     const [formValid, setFormValid] = useState(false);
 
     useEffect(() => {
+        // Set initial form data if in edit mode
         if (edit) {
-            setFormData(reconfigurationCard(card))
+            setFormData(reconfigurationCard(card));
         }
-    }, [])
+    }, []);
+
     useEffect(() => {
+        // Update form validity whenever form data or errors change
         setFormValid(validateForm());
     }, [formData, formError]);
 
+    // Handle input field focus
     const handleFocus = (event) => {
         setFieldToFocus(cardFormFieldsArray.findIndex(field => field.name === event.target.name));
-    }
+    };
 
+    // Validate the entire form
     const validateForm = () => {
         for (const field of cardFormFieldsArray) {
             if (field.required && (!formData[field.name] || formError[field.name])) {
@@ -37,6 +42,7 @@ const CardForm = ({ onClose, edit, card }) => {
         return true;
     };
 
+    // Handle input field changes
     const handleChange = (event) => {
         const { name, value, id } = event.target;
         const { joi, label } = cardFormFieldsArray.find(field => field.id === id);
@@ -50,49 +56,52 @@ const CardForm = ({ onClose, edit, card }) => {
         });
     };
 
-    const restForm = () => {
+    // Reset the form
+    const resetForm = () => {
         setFormData({});
         setFieldToFocus(0);
         setFormError({});
-        setFormValid(false)
-    }
+        setFormValid(false);
+    };
 
+    // Handle form submission
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!formValid) {
-            toast.info("don't piss me off!")
-            return
+            toast.info("Please fill in all required fields correctly.");
+            return;
         }
         try {
             if (edit) {
-                let newCard = (await axios.put(`/cards/${card._id}`, reconfigurationCard(formData))).data
+                // Update an existing card
+                let newCard = (await axios.put(`/cards/${card._id}`, reconfigurationCard(formData))).data;
                 onClose(newCard);
                 toast.success(`The ${formData.title} business card was successfully edited!`);
             } else {
-                console.log(formData);
+                // Create a new card
                 onClose((await axios.post("/cards", formData)).data);
                 toast.success(`The ${formData.title} business card was successfully added!`);
-
             }
         } catch (err) {
-            //console.log(err);
             toast.error(err.response.data);
         }
-
     };
+
     return (
         <Box component={"form"} onSubmit={handleSubmit}>
             <Grid container spacing={2}>
                 {cardFormFieldsArray.map((field, index) =>
                     <Grid item xs={12} sm={field.sm} key={`${new Date()}-${field.id}`}>
-                        < FieldComponent
+                        <FieldComponent
                             onFocus={handleFocus}
                             autoFocus={index === fieldToFocus}
                             state={formData[field.name] || ''}
                             setState={handleChange}
-                            field={field} />
+                            field={field}
+                        />
                         <Typography color={'red'} fontSize={"8pt"}>{formError[field.name] || ''}</Typography>
-                    </Grid>)}
+                    </Grid>
+                )}
                 <Grid item xs={12} sm={6}>
                     <Button
                         type="submit"
@@ -112,13 +121,14 @@ const CardForm = ({ onClose, edit, card }) => {
                         variant="contained"
                         color='secondary'
                         sx={{ mb: 1, mt: { xs: 0, md: 2 } }}
-                        onClick={restForm}
+                        onClick={resetForm}
                     >
-                        <RestartAltIcon /> Rest Form
+                        <RestartAltIcon /> Reset Form
                     </Button>
                 </Grid>
             </Grid>
         </Box>
     )
 };
+
 export default CardForm;
