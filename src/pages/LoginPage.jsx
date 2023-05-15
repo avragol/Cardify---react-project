@@ -21,6 +21,7 @@ import useLoggedIn from '../hooks/useLoggedIn';
 import CancelBtnComp from '../components/CancelBtnComp';
 
 const loginFieldsArray = [
+    // Array of login fields with validation rules
     {
         label: "Email",
         name: "email",
@@ -55,16 +56,17 @@ const LoginPage = () => {
     const [formData, setFormData] = useState({});
     const [formError, setFormError] = useState({});
     const [fieldToFocus, setFieldToFocus] = useState(0);
-    const [failedCount, setFailedCount] = useState(0);
     const [formValid, setFormValid] = useState(false);
     const navigate = useNavigate();
     const loggedIn = useLoggedIn();
 
     const handleFocus = (event) => {
+        // Update the focused field when it receives focus
         setFieldToFocus(loginFieldsArray.findIndex(field => field.name === event.target.name));
     }
 
     const validateForm = () => {
+        // Check if all fields are filled and no validation errors exist
         for (const field of loginFieldsArray) {
             if (!formData[field.name] || formError[field.name]) {
                 return false;
@@ -78,32 +80,35 @@ const LoginPage = () => {
         const { joi, label } = loginFieldsArray.find(field => field.id === id);
         setFormError({
             ...formError,
-            [name]: feildValidation(joi, value, label)
+            [name]: feildValidation(joi, value, label) // Validate the field value and update the error state
         });
         setFormData({
             ...formData,
-            [name]: value
+            [name]: value // Update the form data state with the field value
         });
     };
 
     useEffect(() => {
+        // Update form validity whenever form data or form errors change
         setFormValid(validateForm());
     }, [formData, formError]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!formValid) {
-            toast.info("don't piss me off!")
-            return
+            // Display an error message if the form is invalid
+            toast.info("Please fill in all the required fields correctly.");
+            return;
         }
         try {
             localStorage.setItem("userToken", (await axios.post("/users/login", formData)).data.token);
             loggedIn();
+            // Display a success message with the user's name upon successful login
             toast.success(`Welcome ${(await axios.get("/users/userInfo")).data.firstName}! Good to see you again`);
-            navigate(ROUTES.HOME)
-        } catch (err) {//להמשיך חסימת ניסיון התחברות שגוי
+            navigate(ROUTES.HOME); // Redirect the user to the home page
+        } catch (err) {
+            // Handle login errors and display an error message
             toast.error(err.response.data);
-            setFailedCount(failedCount + 1);
         }
     };
 
@@ -125,30 +130,33 @@ const LoginPage = () => {
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <Grid container spacing={2}>
-                        {loginFieldsArray.map((field, index) =>
+                        {loginFieldsArray.map((field, index) => (
                             <Grid item xs={12} key={`${new Date()}-${field.id}`}>
                                 <FieldComponent
                                     onFocus={handleFocus}
                                     autoFocus={index === fieldToFocus}
                                     state={formData[field.name] || ''}
                                     setState={handleChange}
-                                    field={field} />
-                                <Typography color={'red'} fontSize={"10pt"}>{formError[field.name] || ''}</Typography>
+                                    field={field}
+                                />
+                                <Typography color={'red'} fontSize={'10pt'}>
+                                    {formError[field.name] || ''}
+                                </Typography>
                             </Grid>
-                        )}
+                        ))}
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
                             disabled={!formValid}
-                            color='secondary'
+                            color="secondary"
                             sx={{ mt: 3, mb: 2 }}
                         >
                             Sign In
                         </Button>
                         <CancelBtnComp />
                     </Grid>
-                    <Grid container justifyContent={"flex-end"}>
+                    <Grid container justifyContent="flex-end">
                         <Grid item>
                             <Link to={ROUTES.REGISTER} variant="body2">
                                 {"Don't have an account? Sign Up"}
@@ -159,5 +167,6 @@ const LoginPage = () => {
             </Box>
         </Container>
     );
-}
+};
+
 export default LoginPage;
