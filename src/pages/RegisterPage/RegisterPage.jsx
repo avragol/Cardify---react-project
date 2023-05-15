@@ -20,23 +20,24 @@ import { feildValidation } from '../../validation/feildValidation';
 import ROUTES from '../../routes/ROUTES';
 import CancelBtnComp from '../../components/CancelBtnComp';
 
-
+// Initial state for the registration form
 const initialFormState = {
     biz: false,
 };
 
 const RegisterPage = () => {
-
     const [formData, setFormData] = useState(initialFormState);
     const [formError, setFormError] = useState({});
     const [fieldToFocus, setFieldToFocus] = useState(0);
     const [formValid, setFormValid] = useState(false);
     const navigate = useNavigate();
 
+    // Handle input field focus
     const handleFocus = (event) => {
         setFieldToFocus(registerFieldsArray.findIndex(field => field.name === event.target.name));
-    }
+    };
 
+    // Validate the entire form
     const validateForm = () => {
         for (const field of registerFieldsArray) {
             if (field.required && (!formData[field.name] || formError[field.name])) {
@@ -46,6 +47,7 @@ const RegisterPage = () => {
         return true;
     };
 
+    // Handle input field changes
     const handleChange = (event) => {
         const { name, value, type, checked, id } = event.target;
         if (type !== 'checkbox') {
@@ -65,6 +67,7 @@ const RegisterPage = () => {
         setFormValid(validateForm());
     }, [formData, formError]);
 
+    // Reset the form to initial state
     const restForm = () => {
         setFormData(initialFormState);
         setFieldToFocus(0);
@@ -72,11 +75,12 @@ const RegisterPage = () => {
         setFormValid(false)
     }
 
+    // Submit the form
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!formValid) {
-            toast.info("don't piss me off!")
-            return
+            toast.info("Don't piss me off!");
+            return;
         }
         try {
             await axios.post("/users/register", formData);
@@ -97,14 +101,17 @@ const RegisterPage = () => {
                     alignItems: 'center',
                 }}
             >
+                {/* Avatar icon */}
                 <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                     <HowToRegIcon />
                 </Avatar>
+                {/* Title */}
                 <Typography component="h1" variant="h5">
                     Sign up
                 </Typography>
                 <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
+                        {/* Render input fields */}
                         {registerFieldsArray.map((field, index) =>
                             <Grid item xs={12} sm={field.sm} key={`${new Date()}-${field.id}`}>
                                 < FieldComponent
@@ -116,6 +123,7 @@ const RegisterPage = () => {
                                 <Typography color={'red'} fontSize={"8pt"}>{formError[field.name] || ''}</Typography>
                             </Grid>)}
                         <Grid item xs={12}>
+                            {/* Checkbox for registering as a business user */}
                             <FormControlLabel
                                 control={<Checkbox
                                     checked={formData.isBusinessUser}
@@ -124,10 +132,11 @@ const RegisterPage = () => {
                                     id='biz'
                                     onChange={handleChange}
                                     onFocus={handleFocus} />}
-                                label="Register as buissnes user"
+                                label="Register as business user"
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
+                            {/* Submit button */}
                             <Button
                                 type="submit"
                                 fullWidth
@@ -140,6 +149,7 @@ const RegisterPage = () => {
                             </Button>
                         </Grid>
                         <Grid item xs={12} sm={6}>
+                            {/* Reset button */}
                             <Button
                                 type="button"
                                 fullWidth
@@ -152,8 +162,10 @@ const RegisterPage = () => {
                             </Button>
                         </Grid>
                     </Grid>
+                    {/* Cancel button */}
                     <CancelBtnComp />
                     <Grid container justifyContent="flex-end">
+                        {/* Link to login page */}
                         <Grid item>
                             <Link to={ROUTES.LOGIN} variant="body2">
                                 Already have an account? Sign in
@@ -161,10 +173,8 @@ const RegisterPage = () => {
                         </Grid>
                     </Grid>
                 </Box>
-
             </Box>
         </Container>
-
     );
 }
 export default RegisterPage;
