@@ -1,0 +1,60 @@
+"filename", "language", "Markdown", "JavaScript", "HTML", "CSS", "JavaScript JSX", "JSON", "XML", "comment", "blank", "total"
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\README.md", "Markdown", 2, 0, 0, 0, 0, 0, 0, 0, 1, 3
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\TODO.md", "Markdown", 1, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\package-lock.json", "JSON", 0, 0, 0, 0, 0, 18388, 0, 0, 1, 18389
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\package.json", "JSON", 0, 0, 0, 0, 0, 57, 0, 0, 0, 57
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\public\index.html", "HTML", 0, 0, 17, 0, 0, 0, 0, 23, 3, 43
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\public\manifest.json", "JSON", 0, 0, 0, 0, 0, 25, 0, 0, 1, 26
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\App.css", "CSS", 0, 0, 0, 7, 0, 0, 0, 0, 1, 8
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\App.jsx", "JavaScript JSX", 0, 0, 0, 0, 61, 0, 0, 1, 9, 71
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\App.test.js", "JavaScript", 0, 7, 0, 0, 0, 0, 0, 0, 2, 9
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\components\BusinessCardComp.jsx", "JavaScript JSX", 0, 0, 0, 0, 175, 0, 0, 0, 14, 189
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\components\CancelBtnComp.jsx", "JavaScript JSX", 0, 0, 0, 0, 23, 0, 0, 0, 4, 27
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\components\CardForm\CardForm.jsx", "JavaScript JSX", 0, 0, 0, 0, 113, 0, 0, 1, 10, 124
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\components\CardForm\cardFormFieldsArray.js", "JavaScript", 0, 129, 0, 0, 0, 0, 0, 0, 1, 130
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\components\DialogPartial.jsx", "JavaScript JSX", 0, 0, 0, 0, 50, 0, 0, 0, 2, 52
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\components\EditCardComp.jsx", "JavaScript JSX", 0, 0, 0, 0, 65, 0, 0, 0, 6, 71
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\components\FieldComponent.jsx", "JavaScript JSX", 0, 0, 0, 0, 19, 0, 0, 0, 1, 20
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\components\FooterComp.jsx", "JavaScript JSX", 0, 0, 0, 0, 42, 0, 0, 0, 6, 48
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\components\Navbar\MobileMenuPartial.jsx", "JavaScript JSX", 0, 0, 0, 0, 66, 0, 0, 0, 8, 74
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\components\Navbar\MobileProfilePartial.jsx", "JavaScript JSX", 0, 0, 0, 0, 60, 0, 0, 0, 5, 65
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\components\Navbar\NavLinkComponent.jsx", "JavaScript JSX", 0, 0, 0, 0, 27, 0, 0, 0, 5, 32
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\components\Navbar\NavbarComp.jsx", "JavaScript JSX", 0, 0, 0, 0, 187, 0, 0, 0, 12, 199
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\components\Navbar\ProfileMenuComp.jsx", "JavaScript JSX", 0, 0, 0, 0, 65, 0, 0, 0, 4, 69
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\components\Navbar\SearchPartial.jsx", "JavaScript JSX", 0, 0, 0, 0, 88, 0, 0, 2, 11, 101
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\components\PopoverComp.jsx", "JavaScript JSX", 0, 0, 0, 0, 34, 0, 0, 0, 6, 40
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\components\UserDialog.jsx", "JavaScript JSX", 0, 0, 0, 0, 154, 0, 0, 0, 5, 159
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\hooks\useLoggedIn.js", "JavaScript", 0, 15, 0, 0, 0, 0, 0, 0, 1, 16
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\hooks\useQueryParams.js", "JavaScript", 0, 10, 0, 0, 0, 0, 0, 0, 1, 11
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\index.css", "CSS", 0, 0, 0, 12, 0, 0, 0, 0, 2, 14
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\index.js", "JavaScript", 0, 32, 0, 0, 0, 0, 0, 8, 7, 47
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\logo.svg", "XML", 0, 0, 0, 0, 0, 0, 1, 0, 0, 1
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\pages\AboutPage.jsx", "JavaScript JSX", 0, 0, 0, 0, 128, 0, 0, 0, 7, 135
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\pages\CRMPage.jsx", "JavaScript JSX", 0, 0, 0, 0, 122, 0, 0, 0, 14, 136
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\pages\FavoritesPage.jsx", "JavaScript JSX", 0, 0, 0, 0, 76, 0, 0, 0, 6, 82
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\pages\HomePage.jsx", "JavaScript JSX", 0, 0, 0, 0, 89, 0, 0, 1, 6, 96
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\pages\LoginPage.jsx", "JavaScript JSX", 0, 0, 0, 0, 152, 0, 0, 0, 11, 163
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\pages\MyCardsPage.jsx", "JavaScript JSX", 0, 0, 0, 0, 131, 0, 0, 0, 10, 141
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\pages\ProfilePage.jsx", "JavaScript JSX", 0, 0, 0, 0, 165, 0, 0, 0, 15, 180
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\pages\RegisterPage\RegisterPage.jsx", "JavaScript JSX", 0, 0, 0, 0, 156, 0, 0, 0, 14, 170
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\pages\RegisterPage\registerFieldsArray.js", "JavaScript", 0, 132, 0, 0, 0, 0, 0, 0, 1, 133
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\pages\SandboxPage\HarryPotterPage.jsx", "JavaScript JSX", 0, 0, 0, 0, 68, 0, 0, 1, 7, 76
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\pages\SandboxPage\RRPButton2Partial.jsx", "JavaScript JSX", 0, 0, 0, 0, 7, 0, 0, 1, 1, 9
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\pages\SandboxPage\RRPButtonPartial.jsx", "JavaScript JSX", 0, 0, 0, 0, 8, 0, 0, 0, 0, 8
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\pages\SandboxPage\ReRenderPage.jsx", "JavaScript JSX", 0, 0, 0, 0, 20, 0, 0, 1, 2, 23
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\pages\SandboxPage\SandboxPage.jsx", "JavaScript JSX", 0, 0, 0, 0, 25, 0, 0, 0, 4, 29
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\pages\SandboxPage\UseMemo.jsx", "JavaScript JSX", 0, 0, 0, 0, 26, 0, 0, 0, 1, 27
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\reportWebVitals.js", "JavaScript", 0, 12, 0, 0, 0, 0, 0, 0, 2, 14
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\routes\LoggedProtectedRoute.jsx", "JavaScript JSX", 0, 0, 0, 0, 14, 0, 0, 0, 5, 19
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\routes\PayloadProtectedRoute.jsx", "JavaScript JSX", 0, 0, 0, 0, 19, 0, 0, 0, 5, 24
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\routes\ROUTES.js", "JavaScript", 0, 14, 0, 0, 0, 0, 0, 0, 1, 15
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\routes\Router.jsx", "JavaScript JSX", 0, 0, 0, 0, 46, 0, 0, 5, 9, 60
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\setupTests.js", "JavaScript", 0, 1, 0, 0, 0, 0, 0, 4, 1, 6
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\store\DarkMode.js", "JavaScript", 0, 15, 0, 0, 0, 0, 0, 0, 5, 20
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\store\auth.js", "JavaScript", 0, 24, 0, 0, 0, 0, 0, 0, 3, 27
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\store\bigPie.js", "JavaScript", 0, 10, 0, 0, 0, 0, 0, 0, 2, 12
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\utils\_imgForAvatar.js", "JavaScript", 0, 18, 0, 0, 0, 0, 0, 1, 2, 21
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\utils\recofigurationUser.js", "JavaScript", 0, 18, 0, 0, 0, 0, 0, 0, 1, 19
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\utils\reconfigurationCard.js", "JavaScript", 0, 18, 0, 0, 0, 0, 0, 0, 1, 19
+"c:\Users\avrag\OneDrive\שולחן העבודה\לימודים\projects\project3 - react\cardify\src\validation\feildValidation.js", "JavaScript", 0, 7, 0, 0, 0, 0, 0, 0, 2, 9
+"Total", "-", 3, 462, 17, 19, 2481, 18470, 1, 49, 267, 21769

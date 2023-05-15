@@ -162,7 +162,7 @@ const ProfilePage = () => {
                                 fullWidth
                                 variant="contained"
                                 color='secondary'
-                                sx={{ mt: 1, mb: { xs: 0, md: 2 } }}
+                                sx={{ mt: { xs: 0, md: 1 }, mb: { xs: 1, md: 2 } }}
                                 onClick={restForm}
                             >
                                 <RestartAltIcon /> Rest Form

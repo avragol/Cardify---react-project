@@ -51,7 +51,8 @@ const ProfileMenuComp = ({ anchorEl, isMenuOpen, handleMenuClose, handleLogOut, 
                             display: "block",
                             paddingX: "0.3rem",
                             textTransform: 'none',
-                            backgroundColor: theme.palette.secondary.main
+                            backgroundColor: theme.palette.secondary.main,
+                            mb: { xs: -1, md: 0 }
                         }}
                         color="white"
                         onClick={handleLogOut}>

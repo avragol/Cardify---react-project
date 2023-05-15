@@ -6,7 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
@@ -31,6 +31,7 @@ const RegisterPage = () => {
     const [formError, setFormError] = useState({});
     const [fieldToFocus, setFieldToFocus] = useState(0);
     const [formValid, setFormValid] = useState(false);
+    const navigate = useNavigate();
 
     const handleFocus = (event) => {
         setFieldToFocus(registerFieldsArray.findIndex(field => field.name === event.target.name));
@@ -80,6 +81,7 @@ const RegisterPage = () => {
         try {
             await axios.post("/users/register", formData);
             toast.success(`Welcome ${formData.firstName}! The registration was successful`);
+            navigate(ROUTES.LOGIN);
         } catch (err) {
             toast.error(err.response.data);
         }
@@ -132,7 +134,7 @@ const RegisterPage = () => {
                                 variant="contained"
                                 color='secondary'
                                 disabled={!formValid}
-                                sx={{ mt: 1, mb: { xs: 0, md: 2 } }}
+                                sx={{ mt: 2, mb: { xs: 0, md: 1 } }}
                             >
                                 Sign Up
                             </Button>
