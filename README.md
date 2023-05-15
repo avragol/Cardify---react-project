@@ -22,14 +22,16 @@ The project aims to create a web application called "Cardify" that allows users 
 ```bash
   npm Install
 ```
-4. Extract cardifyServer.zip from the project folder to a separate folder and run the start.bat file in it
+4. Extract cardifyServer.zip from the project folder to a separate folder and run the start.bat file in it.
 
-5. Start the development server:
+5. Make sure that the data base was created in the mongodb, and import the json files to the collections
+
+6. In VSCode, start the development server:
 
 ```bash
   npm start
 ```
 
-6. Welcome! access the application in your web browser at http://localhost:3000.
+7. Welcome! access the application in your web browser at http://localhost:3000.
 
     

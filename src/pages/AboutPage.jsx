@@ -35,7 +35,7 @@ const AboutPage = () => {
                                 <CardMedia
                                     component="img"
                                     alt="Screenshot"
-                                    image="http://localhost:3000/./imgs/a.png"
+                                    image="http://localhost:3000/./imgs/welcome.png"
                                 />
                             </Grid>
                         </Grid>
@@ -49,7 +49,7 @@ const AboutPage = () => {
                                 <CardMedia
                                     component="img"
                                     alt="Screenshot"
-                                    image="http://localhost:3000/./imgs/a.png"
+                                    image="http://localhost:3000/./imgs/register.png"
                                 />
                             </Grid>
                             <Grid item xs={12} md={6}>
@@ -91,7 +91,7 @@ const AboutPage = () => {
                                 <CardMedia
                                     component="img"
                                     alt="Screenshot"
-                                    image="http://localhost:3000/./imgs/a.png"
+                                    image="http://localhost:3000/./imgs/favourites.png"
                                 />
                             </Grid>
                         </Grid>
@@ -104,7 +104,7 @@ const AboutPage = () => {
                                 <CardMedia
                                     component="img"
                                     alt="Screenshot"
-                                    image="http://localhost:3000/./imgs/a.png"
+                                    image="http://localhost:3000/./imgs/biz.png"
                                 />
                             </Grid>
                             <Grid item xs={12} md={6}>

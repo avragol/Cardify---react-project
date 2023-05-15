@@ -72,7 +72,7 @@ const NavbarComp = () => {
         dispatch(authActions.logOut());
         localStorage.removeItem("userToken");
         toast.success("Goodbye! see you later");
-        navigate(ROUTES.HOME);
+        navigate(ROUTES.FAKEHOME);
     };
 
     // Render the profile menu component
