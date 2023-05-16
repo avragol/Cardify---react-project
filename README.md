@@ -1,5 +1,5 @@
 
-# Cardify
+# Cardify ![Logo]('../../public/logo192.png')
 
 The project aims to create a web application called "Cardify" that allows users to manage and share digital business cards.
 
@@ -35,3 +35,30 @@ The project aims to create a web application called "Cardify" that allows users 
 7. Welcome! access the application in your web browser at http://localhost:3000.
 
     
+## Usge
+
+To log in as admin user:
+
+```bash
+email: avi@levi.il
+password: Aa123456!
+```
+
+To log in as biz user:
+
+```bash
+email: aviv@gol.il
+password: Aa123456!
+```
+
+To log in as simple user:
+
+```bash
+email: dani@roz.il
+password: Aa123456!
+```
+
+## Contact
+
+If you have a question about the project - I'd love to be in touch!
+my email: avragol@gmail.com

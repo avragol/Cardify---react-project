@@ -109,7 +109,7 @@ const CardForm = ({ onClose, edit, card }) => {
                         variant="contained"
                         color='secondary'
                         disabled={!formValid}
-                        sx={{ mt: 1, mb: { xs: 0, md: 2 } }}
+                        sx={{ mt: 2, mb: { xs: 0, md: 2 } }}
                     >
                         {edit ? "Save changes" : "Save Card"}
                     </Button>

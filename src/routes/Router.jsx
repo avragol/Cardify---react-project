@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import ROUTES from "./ROUTES";
-import PayloadProtectedRoute from "./PayloadProtectedRoute";
-import LoggedProtectedRoute from "./LoggedProtectedRoute";
+import PayloadProtectedRoute from "./protectedRoutes/PayloadProtectedRoute";
+import LoggedProtectedRoute from "./protectedRoutes/LoggedProtectedRoute";
 import HomePage from "../pages/HomePage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import LoginPage from "../pages/LoginPage";
