@@ -1,5 +1,5 @@
 
-# Cardify ![Logo]('../../public/logo192.png')
+# Cardify
 
 The project aims to create a web application called "Cardify" that allows users to manage and share digital business cards.
 
