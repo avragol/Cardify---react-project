@@ -22,7 +22,7 @@ The project aims to create a web application called "Cardify" that allows users 
 ```bash
   npm Install
 ```
-4. Extract cardifyServer.zip from the project folder to a separate folder and run the start.bat file in it.
+4. Extract cardifyServer.zip from the project folder to a separate folder and run the start.bat file in the server folder.
 
 5. Make sure that the data base was created in the mongodb, and import the json files to the collections
 
