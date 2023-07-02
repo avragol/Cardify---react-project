@@ -13,7 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "./App.css";
-import NavbarComp from "./components/Navbar/NavbarComp";
+import NavbarComp from "./components/navbar/NavbarComp";
 import FooterComp from "./components/FooterComp";
 import Router from "./routes/Router";
 import useLoggedIn from "./hooks/useLoggedIn";
