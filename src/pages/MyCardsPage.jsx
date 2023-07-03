@@ -1,4 +1,4 @@
-import { Container, Typography, CircularProgress, Grid, IconButton, useTheme, Box } from "@mui/material"
+import { Container, Typography, Grid, IconButton, useTheme } from "@mui/material"
 import Dialog from '@mui/material/Dialog';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,6 +10,7 @@ import axios from "axios";
 import AddIcon from "@mui/icons-material/Add";
 
 import BusinessCardComp from "../components/BusinessCardComp";
+import CardSkeltonsPartial from "../components/CardSkeltonsPartial";
 import CardForm from "../components/CardForm/CardForm";
 import useQueryParams from "../hooks/useQueryParams";
 
@@ -117,7 +118,7 @@ const MyCardsPage = () => {
                             </Grid>
                         ))
                     ) : (
-                        <CircularProgress />
+                        <CardSkeltonsPartial />
                     )}
                 </Grid>
             </Container>

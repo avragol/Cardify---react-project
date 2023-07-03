@@ -1,9 +1,10 @@
-import { Container, Typography, CircularProgress, Grid } from "@mui/material"
+import { Container, Typography, Grid } from "@mui/material"
 import { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
 import BusinessCardComp from "../components/BusinessCardComp";
+import CardSkeltonsPartial from "../components/CardSkeltonsPartial";
 import useQueryParams from "../hooks/useQueryParams";
 
 const FavoritesPage = () => {
@@ -76,7 +77,7 @@ const FavoritesPage = () => {
                         ))
                     ) : (
                         // Render a circular progress indicator while loading the data
-                        <CircularProgress />
+                        <CardSkeltonsPartial />
                     )}
                 </Grid>
             </Container>

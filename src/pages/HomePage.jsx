@@ -1,8 +1,9 @@
-import { Container, Typography, CircularProgress, Grid } from "@mui/material"
+import { Container, Typography, Box, Grid, Skeleton } from "@mui/material"
 import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 
 import BusinessCardComp from "../components/BusinessCardComp";
+import CardSkeltonsPartial from "../components/CardSkeltonsPartial";
 import useQueryParams from "../hooks/useQueryParams";
 
 const HomePage = () => {
@@ -53,7 +54,7 @@ const HomePage = () => {
     const handleDeleteFromDisplay = (id) => {
         // Remove a card from the displayed cards array
         setCardsState(cardsState.filter((card) => card._id !== id))
-    }
+    };
 
     return (
         <Fragment>
@@ -81,7 +82,8 @@ const HomePage = () => {
                                 />
                             </Grid>
                         )
-                        : <CircularProgress />} {/* Show a loading indicator */}
+                        : <CardSkeltonsPartial />
+                    } {/* Show a loading indicator */}
                 </Grid>
             </Container>
         </Fragment>
