@@ -32,7 +32,7 @@ const FooterComp = () => {
                     <IconButton className={classes.iconButton} href="https://www.linkedin.com/in/avraham-gol-5558b3246">
                         <LinkedInIcon />
                     </IconButton>
-                    <IconButton className={classes.iconButton} href="https://github.com/https://github.com/avragol">
+                    <IconButton className={classes.iconButton} href="https://github.com/avragol">
                         <GitHubIcon />
                     </IconButton>
                     <IconButton className={classes.iconButton} href="https://wa.me/972523244426">
