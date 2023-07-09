@@ -58,7 +58,7 @@ const HomePage = () => {
 
     return (
         <Fragment>
-            <Container maxWidth="sm" sx={{ mt: 2 }}>
+            <Container maxWidth="md" sx={{ mt: 2 }}>
                 <Typography component="h1" variant="h2" align="center" gutterBottom>
                     Cardify
                 </Typography>

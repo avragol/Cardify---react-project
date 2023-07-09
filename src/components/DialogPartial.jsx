@@ -15,7 +15,7 @@ const DialogPartial = ({ card, likes }) => {
                     </Typography>
                 )}
                 {card.description && (
-                    <DialogContentText>{card.description}</DialogContentText>
+                    <DialogContentText style={{ marginBottom: "0.5rem" }}>{card.description}</DialogContentText>
                 )}
                 {card.country && card.city && card.street && card.houseNumber && (
                     <DialogContentText>

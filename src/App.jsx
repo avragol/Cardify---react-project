@@ -34,6 +34,13 @@ const light = {
       primary: '#333333',
     },
   },
+  typography: {
+    fontFamily: [
+      'Montserrat',
+      'Roboto',
+      'sans-serif',
+    ].join(','),
+  },
 };
 
 // Define dark theme
@@ -52,6 +59,13 @@ const dark = {
     text: {
       primary: '#ffffff',
     },
+  },
+  typography: {
+    fontFamily: [
+      'Montserrat',
+      'Roboto',
+      'sans-serif',
+    ].join(','),
   },
 };
 

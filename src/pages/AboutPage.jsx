@@ -15,7 +15,7 @@ const AboutPage = () => {
 
             <Grid container spacing={4} mt={4}>
                 <Grid item xs={12}>
-                    <Card sx={{ backgroundColor: theme.palette.info.main, padding: "1rem" }}>
+                    <Card sx={{ backgroundColor: theme.palette.primary, padding: "1rem" }}>
                         <Grid container alignItems={'center'}>
                             <Grid item xs={12} md={6}>
                                 <CardContent>
@@ -43,7 +43,7 @@ const AboutPage = () => {
                 </Grid>
 
                 <Grid item xs={12}>
-                    <Card sx={{ backgroundColor: theme.palette.info.main, padding: "1rem" }}>
+                    <Card sx={{ backgroundColor: theme.palette.primary, padding: "1rem" }}>
                         <Grid container alignItems={'center'}>
                             <Grid item xs={12} md={6}>
                                 <CardMedia
@@ -71,7 +71,7 @@ const AboutPage = () => {
                 </Grid>
 
                 <Grid item xs={12}>
-                    <Card sx={{ backgroundColor: theme.palette.info.main, padding: "1rem" }}>
+                    <Card sx={{ backgroundColor: theme.palette.primary, padding: "1rem" }}>
                         <Grid container alignItems={'center'}>
                             <Grid item xs={12} md={6}>
                                 <CardContent>
@@ -98,7 +98,7 @@ const AboutPage = () => {
                     </Card>
                 </Grid>
                 <Grid item xs={12}>
-                    <Card sx={{ backgroundColor: theme.palette.info.main, padding: "1rem" }}>
+                    <Card sx={{ backgroundColor: theme.palette.primary, padding: "1rem" }}>
                         <Grid container alignItems={'center'}>
                             <Grid item xs={12} md={6}>
                                 <CardMedia

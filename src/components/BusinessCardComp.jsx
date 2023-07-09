@@ -125,7 +125,7 @@ const BusinessCardComp = ({ cardFromParent, onUnMark, onDelete }) => {
                     />
                     <CardContent>
 
-                        <Typography variant="body1" sx={{ mb: 1 }}>{card.description}</Typography>
+                        {/* <Typography variant="body1" sx={{ mb: 1 }}>{card.description}</Typography> */}
                         <Typography variant="body2">
                             {card.country}, {card.city}, {card.street} {card.houseNumber}
                         </Typography>
