@@ -8,7 +8,7 @@ const NavLinkComponent = ({ url, label }) => {
 
     return (
         <NavLink key={url} to={url}
-        >
+            style={{ textDecoration: "none" }}>
             {() => (
                 <Typography
                     variant="button"
@@ -16,7 +16,6 @@ const NavLinkComponent = ({ url, label }) => {
                         display: "block",
                         paddingX: "0.1rem",
                         textTransform: 'none',
-                        textDecoration: "none",
                         fontWeight: isDarkMode ? "400" : "500"
                     }}
                     color={"white"}

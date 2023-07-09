@@ -88,7 +88,7 @@ const NavbarComp = () => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" color='secondary'>
+            <AppBar position="static" color='secondary' enableColorOnDark>
                 <Toolbar>
                     <Typography
                         variant="h6"

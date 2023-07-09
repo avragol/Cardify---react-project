@@ -1,8 +1,22 @@
+body {
+    background-color: #F8F9FA;
+}
+
 button img {
-    filter: grayscale(80%);
+    filter: grayscale(40%);
     transition: filter 300ms;
 }
 
 button:hover img {
     filter: grayscale(0%);
+}
+
+.customCard {
+    border-radius: 2%;
+    padding: 3%;
+    border: 2px solid transparent;
+}
+
+.customCard:hover {
+    border-color: #000;
 }

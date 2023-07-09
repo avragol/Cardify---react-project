@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   Container,
   ThemeProvider,
   createTheme,
   CssBaseline,
-  CircularProgress,
 } from "@mui/material";
 import { useSelector } from "react-redux";
 
@@ -22,6 +21,18 @@ import useLoggedIn from "./hooks/useLoggedIn";
 const light = {
   palette: {
     mode: "light",
+    primary: {
+      main: '#007BFF',
+    },
+    secondary: {
+      main: '#34C759',
+    },
+    background: {
+      default: '#F8F9FA',
+    },
+    text: {
+      primary: '#333333',
+    },
   },
 };
 
@@ -29,6 +40,18 @@ const light = {
 const dark = {
   palette: {
     mode: "dark",
+    primary: {
+      main: '#ff9800',
+    },
+    secondary: {
+      main: '#9c27b0',
+    },
+    background: {
+      default: '#303030',
+    },
+    text: {
+      primary: '#ffffff',
+    },
   },
 };
 

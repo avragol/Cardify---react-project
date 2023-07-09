@@ -101,7 +101,7 @@ const BusinessCardComp = ({ cardFromParent, onUnMark, onDelete }) => {
     return (
         <React.Fragment>
 
-            <Card square raised>
+            <Card square raised className="customCard">
                 <CardActionArea onClick={openCardDescription}>
                     <CardMedia component="img" title="Alt text" image={card.image.url} />
                     {isMyCard && (
