@@ -1,7 +1,7 @@
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
-import { Box, useTheme } from '@mui/material';
+import { Box, useTheme, MenuList } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
 import ROUTES from '../../routes/ROUTES';
@@ -26,11 +26,14 @@ const ProfileMenuComp = ({ anchorEl, isMenuOpen, handleMenuClose, handleLogOut, 
             }}
             open={isMenuOpen}
             onClose={handleMenuClose}
+            PaperProps={{
+                sx: {
+                    backgroundColor: theme.palette.secondary.main,
+                    border: "2px solid #fff"
+                },
+            }}
         >
-            <Box
-                sx={{
-                    backgroundColor: theme.palette.secondary.main
-                }}>
+            <MenuList>
                 <Typography
                     variant="button"
                     sx={{
@@ -51,7 +54,6 @@ const ProfileMenuComp = ({ anchorEl, isMenuOpen, handleMenuClose, handleLogOut, 
                             display: "block",
                             paddingX: "0.3rem",
                             textTransform: 'none',
-                            backgroundColor: theme.palette.secondary.main,
                             mb: { xs: -1, md: 0 }
                         }}
                         color="white"
@@ -62,7 +64,7 @@ const ProfileMenuComp = ({ anchorEl, isMenuOpen, handleMenuClose, handleLogOut, 
                 <MenuItem onClick={handleMenuClose}>
                     <NavLinkComponent url={ROUTES.PROFILE} label={"Profile"} />
                 </MenuItem>
-            </Box>
+            </MenuList>
         </Menu>
     )
 }

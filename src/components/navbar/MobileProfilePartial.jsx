@@ -1,14 +1,18 @@
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
 import Menu from '@mui/material/Menu';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { NavLink } from 'react-router-dom';
 
+import NavLinkComponent from './NavLinkComponent';
 
 const MobileProfilePartial = ({ pages }) => {
+
+    const theme = useTheme();
 
     const [anchorElNav, setAnchorElNav] = useState(null);
 
@@ -48,16 +52,20 @@ const MobileProfilePartial = ({ pages }) => {
                 sx={{
                     display: { xs: 'block', md: 'none' },
                 }}
+                PaperProps={{
+                    sx: {
+                        backgroundColor: theme.palette.secondary.main,
+                        border: "2px solid #fff"
+                    },
+                }}
             >
-                {pages.map((page) => (
-                    <MenuItem key={page.url} onClick={handleCloseNavMenu}>
-                        <NavLink to={page.url}>
-                            <Typography textAlign="center" color={"#9C27B0"}>
-                                {page.label}
-                            </Typography>
-                        </NavLink>
-                    </MenuItem>
-                ))}
+                <MenuList>
+                    {pages.map((page) => (
+                        <MenuItem key={page.url} onClick={handleCloseNavMenu}>
+                            <NavLinkComponent url={page.url} label={page.label} />
+                        </MenuItem>
+                    ))}
+                </MenuList>
             </Menu>
         </Box>
     )
