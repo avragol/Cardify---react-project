@@ -2,23 +2,32 @@ body {
     background-color: #F8F9FA;
 }
 
+
 @media (min-width: 900px) {
+    body {
+        background-image: radial-gradient(rgba(51, 51, 51, 0.3) 0.65px, rgba(248, 249, 250, 0.3) 0.65px);
+        background-size: 13px 13px;
+    }
+
     button img {
         filter: grayscale(60%);
         transition: filter 300ms;
     }
+
+    button:hover img {
+        filter: grayscale(0%);
+    }
 }
 
-button:hover img {
-    filter: grayscale(0%);
-}
 
 .customCard {
     border-radius: 2%;
     padding: 3%;
     border: 2px solid transparent;
+    transition: all 300ms ease-in-out !important;
 }
 
 .customCard:hover {
     border-color: #000;
+    transform: scaleY(110%) scaleX(105%);
 }
