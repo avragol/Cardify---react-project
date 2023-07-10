@@ -1,5 +1,5 @@
 
-#  Cardifyx
+#  Cardify
 ###  The website is Live! take a look ---
 https://first-deploy-ag-client.onrender.com/
 
