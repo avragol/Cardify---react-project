@@ -2,6 +2,7 @@
 #  Cardify
 ###  The website is Live! take a look ---
 https://first-deploy-ag-client.onrender.com/
+(The site is a bit slow because it sits on free hosting)
 
   
 
